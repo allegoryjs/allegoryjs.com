@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[next]/internal/font/google/lora_47c3c806.module.css"],"sourcesContent":["@font-face {\n    font-family: 'Lora Fallback';\n    src: local(\"Times New Roman\");\n    ascent-override: 87.33%;\ndescent-override: 23.78%;\nline-gap-override: 0.00%;\nsize-adjust: 115.20%;\n\n}\n.className {\n    font-family: 'Lora', 'Lora Fallback';\n    font-style: normal;\n\n}\n.variable {\n    --font-lora: 'Lora', 'Lora Fallback';\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;AASA;;;;;AAKA","ignoreList":[0]}}]
-}
