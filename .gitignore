@@ -1,5 +1,9 @@
 # dependencies (bun install)
 node_modules
+package-lock.json
+
+# Next.js
+.next
 
 # output
 out
