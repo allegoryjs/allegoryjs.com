@@ -1,7 +1,9 @@
 # dependencies (bun install)
 node_modules
+package-lock.json
 
 # output
+.next
 out
 dist
 *.tgz
