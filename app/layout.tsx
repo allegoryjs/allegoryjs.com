@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { Lora, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
+import { I18nProvider } from '@/lib/i18n'
 import './globals.css'
 
 const _lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -61,7 +62,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
         <Analytics />
         <Script
           data-goatcounter="https://allegoryjs.goatcounter.com/count"
