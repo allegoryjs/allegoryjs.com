@@ -34,7 +34,7 @@ function CommitSkeleton() {
 }
 
 export function GitHubCommits() {
-  const { t } = useI18n()
+  const { t, locale } = useI18n()
   const { data, error, isLoading } = useSWR<Commit[]>(
     "https://api.github.com/repos/allegoryjs/allegoryjs/commits?per_page=5",
     fetcher,
@@ -54,7 +54,7 @@ export function GitHubCommits() {
     if (diffInDays === 1) return t('githubCommits.yesterday')
     if (diffInDays < 7) return t('githubCommits.daysAgo', { count: diffInDays })
     if (diffInDays < 30) return t('githubCommits.weeksAgo', { count: Math.floor(diffInDays / 7) })
-    return date.toLocaleDateString("en-US", { month: "short", day: "numeric" })
+    return date.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { month: "short", day: "numeric" })
   }
 
   return (
