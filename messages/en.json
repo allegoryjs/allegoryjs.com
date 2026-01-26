@@ -1,0 +1,90 @@
+{
+  "hero": {
+    "underDevelopment": "Under Active Development",
+    "tagline": "A Web-Native Interactive Fiction Engine",
+    "description": "Bridge the gap between parser-based narratives and systemic game design with a fluent API that gets out of the way, so you can focus on building your dream game.",
+    "viewOnGitHub": "View on GitHub",
+    "getUpdates": "Get Updates"
+  },
+  "howItWorks": {
+    "title": "How It Works",
+    "subtitle": "Allegory.js reimagines interactive fiction by treating stories as living simulations rather than branching trees.",
+    "simulationFirst": {
+      "title": "Simulation-First",
+      "description": "World state is managed by a physics/logic simulation, not a narrative tree. Every object, character, and rule exists in a living, reactive world."
+    },
+    "eventDriven": {
+      "title": "Event-Driven",
+      "description": "No 60fps game loop. The engine idles until a user input or system event occurs, making it perfect for narrative-focused experiences."
+    },
+    "webNative": {
+      "title": "Web-Native",
+      "description": "Built on standard TypeScript/ESM. Leverage the browser ecosystem—CSS, WebGL, Web Audio—without proprietary compilers or tools."
+    },
+    "underTheHood": "Under the Hood",
+    "architecture": {
+      "ecsDataModel": {
+        "label": "ECS Data Model",
+        "description": "Entities, Components, and Systems treat your world as a relational database."
+      },
+      "semanticNLP": {
+        "label": "Semantic NLP",
+        "description": "Intent classification via embeddings, not rigid string parsing."
+      },
+      "lawsMiddleware": {
+        "label": "Laws & Middleware",
+        "description": "Decoupled logic with automatic specificity scoring and conflict resolution."
+      },
+      "reactiveEventBus": {
+        "label": "Reactive Event Bus",
+        "description": "NPCs and systems respond to world changes, enabling emergent behavior."
+      }
+    },
+    "codeExample": "example.js"
+  },
+  "githubCommits": {
+    "activeDevelopment": "Active Development",
+    "title": "Recent Activity",
+    "subtitle": "Follow along as we build Allegory.js in the open.",
+    "repository": "allegoryjs/allegoryjs",
+    "unableToLoad": "Unable to load commits right now.",
+    "viewOnGitHub": "View on GitHub",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "daysAgo": "{count} days ago",
+    "weeksAgo": "{count} weeks ago",
+    "repositoryNotFound": "Repository not found or no commits available.",
+    "checkRepository": "Check Repository",
+    "viewAllCommits": "View all commits on GitHub →"
+  },
+  "newsletter": {
+    "title": "Stay in the Story",
+    "subtitle": "Get occasional updates on Allegory.js development, new features, and insights into building interactive fiction for the web.",
+    "emailPlaceholder": "your@email.com",
+    "emailLabel": "Email address",
+    "subscribe": "Subscribe",
+    "subscribing": "Subscribing...",
+    "errorMessage": "Something went wrong. Please try again.",
+    "tryAgain": "Try again",
+    "successTitle": "You're on the list!",
+    "successMessage": "We'll be in touch when there's something worth sharing.",
+    "disclaimer": "No spam, ever. Unsubscribe anytime."
+  },
+  "footer": {
+    "tagline": "A web-native interactive fiction engine",
+    "githubLabel": "GitHub Repository",
+    "discussions": "Discussions",
+    "issues": "Issues",
+    "madeWith": "Made with care for storytellers and builders.",
+    "copyright": "© {year} Allegory.js. All rights reserved."
+  },
+  "languageSwitcher": {
+    "title": "Select Language",
+    "description": "Choose your preferred language",
+    "close": "Close"
+  },
+  "metadata": {
+    "title": "Allegory.js - A Web-Native Interactive Fiction Engine",
+    "description": "Build immersive, simulation-driven interactive fiction for the web. Allegory.js bridges parser-based narratives with systemic game design."
+  }
+}

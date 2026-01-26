@@ -3,8 +3,10 @@
 import React from "react"
 
 import { useState } from "react"
+import { useI18n } from '@/lib/i18n'
 
 export function Newsletter() {
+  const { t } = useI18n()
   const [email, setEmail] = useState("")
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle")
 
@@ -45,22 +47,21 @@ export function Newsletter() {
         </div>
 
         <h2 className="text-3xl md:text-4xl font-serif mb-4 text-card-foreground">
-          Stay in the Story
+          {t('newsletter.title')}
         </h2>
         <p className="text-muted-foreground mb-8">
-          Get occasional updates on Allegory.js development, new features, and 
-          insights into building interactive fiction for the web.
+          {t('newsletter.subtitle')}
         </p>
 
         {status === "error" ? (
           <div className="p-6 bg-background rounded-lg border border-destructive/30 mb-4">
-            <p className="text-destructive font-medium">Something went wrong. Please try again.</p>
+            <p className="text-destructive font-medium">{t('newsletter.errorMessage')}</p>
             <button
               type="button"
               onClick={() => setStatus("idle")}
               className="mt-3 text-sm text-muted-foreground underline hover:text-foreground"
             >
-              Try again
+              {t('newsletter.tryAgain')}
             </button>
           </div>
         ) : status === "success" ? (
@@ -74,20 +75,20 @@ export function Newsletter() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p className="text-foreground font-medium">{"You're on the list!"}</p>
+            <p className="text-foreground font-medium">{t('newsletter.successTitle')}</p>
             <p className="text-sm text-muted-foreground mt-1">
-              {"We'll be in touch when there's something worth sharing."}
+              {t('newsletter.successMessage')}
             </p>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
             <label className="sr-only" htmlFor="email">
-              Email address
+              {t('newsletter.emailLabel')}
             </label>
             <input
               id="email"
               type="email"
-              placeholder="your@email.com"
+              placeholder={t('newsletter.emailPlaceholder')}
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -104,17 +105,17 @@ export function Newsletter() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Subscribing...
+                  {t('newsletter.subscribing')}
                 </span>
               ) : (
-                "Subscribe"
+                t('newsletter.subscribe')
               )}
             </button>
           </form>
         )}
 
         <p className="text-xs text-muted-foreground mt-4">
-          No spam, ever. Unsubscribe anytime.
+          {t('newsletter.disclaimer')}
         </p>
       </div>
     </section>
