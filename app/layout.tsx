@@ -2,6 +2,7 @@ import React from "react"
 import type { Metadata } from 'next'
 import { Lora, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import Script from 'next/script'
 import './globals.css'
 
 const _lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -40,6 +41,11 @@ export default function RootLayout({
       <body className={`font-sans antialiased`}>
         {children}
         <Analytics />
+        <Script
+          data-goatcounter="https://allegoryjs.goatcounter.com/count"
+          src="https://gc.zgo.at/count.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   )

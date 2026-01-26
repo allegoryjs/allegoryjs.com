@@ -1,5 +1,7 @@
 # allegoryjs.com
 
+This site uses [GoatCounter](https://www.goatcounter.com/) for privacy-respecting analytics. GoatCounter does not track personal information and does not use cookies.
+
 To install dependencies:
 
 ```bash
