@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Allegory.js - A Web-Native Interactive Fiction Engine',
     description: 'Build immersive, simulation-driven interactive fiction for the web. Allegory.js bridges parser-based narratives with systemic game design.',
-    url: 'https://allegory.js.org',
+    url: 'https://allegoryjs.com',
     siteName: 'Allegory.js',
     images: [
       {
