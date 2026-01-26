@@ -20,11 +20,24 @@ export function Hero() {
         <h1 className="mb-6 flex justify-center">
           <span className="sr-only">Allegory.js</span>
           <div className="w-[min(90vw,520px)]">
-            <img
-              src="/allegory_logo_horizontal.png"
-              alt="Allegory.js"
-              className="w-full h-auto object-contain dark:invert dark:sepia-[0.7]"
-            />
+            <picture>
+              <source
+                media="(max-width: 767px)"
+                srcSet="/allegory_logo_horizontal_mobile.webp"
+                type="image/webp"
+              />
+              <source
+                srcSet="/allegory_logo_horizontal.webp"
+                type="image/webp"
+              />
+              <img
+                src="/allegory_logo_horizontal.png"
+                alt="Allegory.js"
+                className="w-full h-auto object-contain dark:invert dark:sepia-[0.7]"
+                width="3133"
+                height="1205"
+              />
+            </picture>
           </div>
         </h1>
 
