@@ -67,7 +67,7 @@ export function HowItWorks() {
         </header>
 
         {/* Core Philosophy Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16" role="list" aria-label="Core features">
+        <div className="grid md:grid-cols-3 gap-6 mb-16" role="list" aria-label={t('accessibility.coreFeatures')}>
           {features.map((feature) => (
             <article
               key={feature.title}
@@ -88,7 +88,7 @@ export function HowItWorks() {
           <h3 className="text-xl font-serif mb-6 text-foreground text-center">
             {t('howItWorks.underTheHood')}
           </h3>
-          <div className="grid sm:grid-cols-2 gap-6" role="list" aria-label="Architecture components">
+          <div className="grid sm:grid-cols-2 gap-6" role="list" aria-label={t('accessibility.architectureComponents')}>
             {architecture.map((item, index) => (
               <div key={item.label} className="flex gap-4" role="listitem">
                 <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center font-mono text-sm" aria-hidden="true">
@@ -111,7 +111,7 @@ export function HowItWorks() {
             <div className="w-3 h-3 rounded-full bg-green-500/50" aria-hidden="true"></div>
             <span className="ml-2 text-xs text-muted-foreground font-mono">{t('howItWorks.codeExample')}</span>
           </div>
-          <pre className="p-6 text-sm overflow-x-auto" role="region" aria-label="Code example">
+          <pre className="p-6 text-sm overflow-x-auto" role="region" aria-label={t('accessibility.codeExample')}>
             <code className="text-foreground font-mono">
 {`// Define entities with a fluent API
 ThereIsAContainer('chest')

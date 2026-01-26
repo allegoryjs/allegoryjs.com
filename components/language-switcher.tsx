@@ -65,7 +65,7 @@ export function LanguageSwitcher() {
           className={`fixed top-6 right-6 z-50 p-3 bg-background border border-primary/50 rounded-full hover:bg-primary/10 hover:border-primary transition-all shadow-lg ${
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0 pointer-events-none'
           }`}
-          aria-label="Change language"
+          aria-label={t('accessibility.changeLanguage')}
         >
           <Globe className="w-5 h-5 text-primary" />
         </button>

@@ -89,7 +89,7 @@ export function Newsletter() {
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" aria-label="Newsletter subscription form">
+          <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3" aria-label={t('accessibility.newsletterForm')}>
             <label className="sr-only" htmlFor="email">
               {t('newsletter.emailLabel')}
             </label>

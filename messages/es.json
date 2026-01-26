@@ -87,7 +87,15 @@
     "close": "Cerrar"
   },
   "accessibility": {
-    "skipToContent": "Saltar al contenido principal"
+    "skipToContent": "Saltar al contenido principal",
+    "footerNavigation": "Navegación del pie de página",
+    "recentCommits": "Commits recientes",
+    "avatarFor": "Avatar de {name}",
+    "coreFeatures": "Características principales",
+    "architectureComponents": "Componentes de arquitectura",
+    "codeExample": "Ejemplo de código",
+    "changeLanguage": "Cambiar idioma",
+    "newsletterForm": "Formulario de suscripción al boletín"
   },
   "metadata": {
     "title": "Allegory.js - Un motor de ficción interactiva nativo de la web",

@@ -85,7 +85,7 @@ export function GitHubCommits() {
             <span className="text-sm font-medium text-foreground">{t('githubCommits.repository')}</span>
           </div>
 
-          <div className="divide-y divide-border" role="list" aria-label="Recent commits">
+          <div className="divide-y divide-border" role="list" aria-label={t('accessibility.recentCommits')}>
             {isLoading && (
               <>
                 <CommitSkeleton />
@@ -129,7 +129,7 @@ export function GitHubCommits() {
                     loading="lazy"
                   />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs text-muted-foreground" aria-label={`Avatar for ${commit.commit.author.name}`}>
+                  <div className="w-8 h-8 rounded-full bg-muted flex items-center justify-center text-xs text-muted-foreground" aria-label={t('accessibility.avatarFor', { name: commit.commit.author.name })}>
                     {commit.commit.author.name.charAt(0).toUpperCase()}
                   </div>
                 )}

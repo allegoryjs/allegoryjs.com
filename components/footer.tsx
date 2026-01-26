@@ -20,7 +20,7 @@ export function Footer() {
             </p>
           </div>
 
-          <nav className="flex items-center gap-6" aria-label="Footer navigation">
+          <nav className="flex items-center gap-6" aria-label={t('accessibility.footerNavigation')}>
             <a
               href="https://github.com/allegoryjs/allegoryjs"
               target="_blank"

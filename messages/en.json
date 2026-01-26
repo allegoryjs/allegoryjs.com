@@ -87,7 +87,15 @@
     "close": "Close"
   },
   "accessibility": {
-    "skipToContent": "Skip to main content"
+    "skipToContent": "Skip to main content",
+    "footerNavigation": "Footer navigation",
+    "recentCommits": "Recent commits",
+    "avatarFor": "Avatar for {name}",
+    "coreFeatures": "Core features",
+    "architectureComponents": "Architecture components",
+    "codeExample": "Code example",
+    "changeLanguage": "Change language",
+    "newsletterForm": "Newsletter subscription form"
   },
   "metadata": {
     "title": "Allegory.js - A Web-Native Interactive Fiction Engine",
