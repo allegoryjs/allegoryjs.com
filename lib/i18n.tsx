@@ -22,15 +22,19 @@ export function I18nProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     // Load locale from localStorage on mount
-    const savedLocale = localStorage.getItem('locale') as Locale | null
-    if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
-      setLocaleState(savedLocale)
+    if (typeof window !== 'undefined') {
+      const savedLocale = localStorage.getItem('locale') as Locale | null
+      if (savedLocale && (savedLocale === 'en' || savedLocale === 'es')) {
+        setLocaleState(savedLocale)
+      }
     }
   }, [])
 
   const setLocale = (newLocale: Locale) => {
     setLocaleState(newLocale)
-    localStorage.setItem('locale', newLocale)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('locale', newLocale)
+    }
   }
 
   const t = (key: string, params?: Record<string, string | number>): string => {
