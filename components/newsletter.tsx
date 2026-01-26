@@ -55,9 +55,9 @@ export function Newsletter() {
 
         {/* Screen reader live region for status updates */}
         <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
-          {status === "loading" && "Subscribing to newsletter..."}
-          {status === "success" && "Successfully subscribed to newsletter!"}
-          {status === "error" && "Error subscribing to newsletter. Please try again."}
+          {status === "loading" && t('newsletter.loadingStatus')}
+          {status === "success" && t('newsletter.successStatus')}
+          {status === "error" && t('newsletter.errorStatus')}
         </div>
 
         {status === "error" ? (

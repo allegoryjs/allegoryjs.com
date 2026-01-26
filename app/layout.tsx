@@ -21,10 +21,6 @@ export const metadata: Metadata = {
   publisher: 'Allegory.js',
   alternates: {
     canonical: 'https://allegoryjs.com',
-    languages: {
-      'en': 'https://allegoryjs.com',
-      'es': 'https://allegoryjs.com',
-    },
   },
   icons: {
     icon: [

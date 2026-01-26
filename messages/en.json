@@ -68,7 +68,10 @@
     "tryAgain": "Try again",
     "successTitle": "You're on the list!",
     "successMessage": "We'll be in touch when there's something worth sharing.",
-    "disclaimer": "No spam, ever. Unsubscribe anytime."
+    "disclaimer": "No spam, ever. Unsubscribe anytime.",
+    "loadingStatus": "Subscribing to newsletter...",
+    "successStatus": "Successfully subscribed to newsletter!",
+    "errorStatus": "Error subscribing to newsletter. Please try again."
   },
   "footer": {
     "tagline": "A web-native interactive fiction engine",
@@ -82,6 +85,9 @@
     "title": "Select Language",
     "description": "Choose your preferred language",
     "close": "Close"
+  },
+  "accessibility": {
+    "skipToContent": "Skip to main content"
   },
   "metadata": {
     "title": "Allegory.js - A Web-Native Interactive Fiction Engine",
