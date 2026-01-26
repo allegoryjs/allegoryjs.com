@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Globe } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useI18n } from '@/lib/i18n'
@@ -13,31 +13,32 @@ const languages = [
 export function LanguageSwitcher() {
   const [open, setOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
-  const [lastScrollY, setLastScrollY] = useState(0)
+  const lastScrollY = useRef(0)
+  const timeoutId = useRef<NodeJS.Timeout>()
   const { locale, setLocale, t } = useI18n()
 
   useEffect(() => {
-    let timeoutId: NodeJS.Timeout
-    
     const handleScroll = () => {
       // Clear the previous timeout
-      clearTimeout(timeoutId)
+      if (timeoutId.current) {
+        clearTimeout(timeoutId.current)
+      }
       
       // Throttle scroll event to every 100ms
-      timeoutId = setTimeout(() => {
+      timeoutId.current = setTimeout(() => {
         if (typeof window === 'undefined') return
         
         const currentScrollY = window.scrollY
         
         // Show when scrolling up or at the top
-        if (currentScrollY < lastScrollY || currentScrollY < 10) {
+        if (currentScrollY < lastScrollY.current || currentScrollY < 10) {
           setIsVisible(true)
-        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
           // Hide when scrolling down and past 100px
           setIsVisible(false)
         }
         
-        setLastScrollY(currentScrollY)
+        lastScrollY.current = currentScrollY
       }, 100)
     }
 
@@ -45,10 +46,12 @@ export function LanguageSwitcher() {
       window.addEventListener('scroll', handleScroll, { passive: true })
       return () => {
         window.removeEventListener('scroll', handleScroll)
-        clearTimeout(timeoutId)
+        if (timeoutId.current) {
+          clearTimeout(timeoutId.current)
+        }
       }
     }
-  }, [lastScrollY])
+  }, [])
 
   const handleLanguageChange = (languageCode: 'en' | 'es') => {
     setLocale(languageCode)
