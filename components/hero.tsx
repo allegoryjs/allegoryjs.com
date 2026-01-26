@@ -5,6 +5,15 @@ export function Hero() {
       <div className="absolute inset-0 opacity-30 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI24pIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')]" />
 
       <div className="max-w-4xl mx-auto text-center relative">
+        {/* Development badge */}
+        <div className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 text-xs text-muted-foreground border border-border/60 rounded-full bg-background/60">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/60 opacity-60"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent/70"></span>
+          </span>
+          Under Active Development
+        </div>
+
         <h1 className="mb-6 flex justify-center">
           <span className="sr-only">Allegory.js</span>
           <div className="w-[min(90vw,520px)]">
@@ -44,15 +53,6 @@ export function Hero() {
           >
             Get Updates
           </a>
-        </div>
-
-        {/* Development badge */}
-        <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 text-xs text-muted-foreground border border-border/60 rounded-full bg-background/60">
-          <span className="relative flex h-1.5 w-1.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/60 opacity-60"></span>
-            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent/70"></span>
-          </span>
-          Under Active Development
         </div>
       </div>
 
