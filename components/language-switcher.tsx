@@ -19,20 +19,17 @@ export function LanguageSwitcher() {
   const [open, setOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
   const lastScrollY = useRef(0)
-  const timeoutId = useRef<NodeJS.Timeout>()
+  const lastExecutionTime = useRef(0)
   const { locale, setLocale, t } = useI18n()
 
   useEffect(() => {
     const handleScroll = () => {
-      // Clear the previous timeout
-      if (timeoutId.current) {
-        clearTimeout(timeoutId.current)
-      }
+      if (typeof window === 'undefined') return
       
-      // Throttle scroll event
-      timeoutId.current = setTimeout(() => {
-        if (typeof window === 'undefined') return
-        
+      const now = Date.now()
+      
+      // Throttle: only execute if enough time has passed since last execution
+      if (now - lastExecutionTime.current >= SCROLL_THROTTLE_MS) {
         const currentScrollY = window.scrollY
         
         // Show when scrolling up or at the top
@@ -44,16 +41,14 @@ export function LanguageSwitcher() {
         }
         
         lastScrollY.current = currentScrollY
-      }, SCROLL_THROTTLE_MS)
+        lastExecutionTime.current = now
+      }
     }
 
     if (typeof window !== 'undefined') {
       window.addEventListener('scroll', handleScroll, { passive: true })
       return () => {
         window.removeEventListener('scroll', handleScroll)
-        if (timeoutId.current) {
-          clearTimeout(timeoutId.current)
-        }
       }
     }
   }, [])
@@ -67,12 +62,12 @@ export function LanguageSwitcher() {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button
-          className={`fixed top-6 right-6 z-50 p-3 bg-background border border-accent/50 rounded-full hover:bg-accent/10 hover:border-accent transition-all shadow-lg ${
+          className={`fixed top-6 right-6 z-50 p-3 bg-background border border-primary/50 rounded-full hover:bg-primary/10 hover:border-primary transition-all shadow-lg ${
             isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0 pointer-events-none'
           }`}
           aria-label="Change language"
         >
-          <Globe className="w-5 h-5 text-accent" />
+          <Globe className="w-5 h-5 text-primary" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
