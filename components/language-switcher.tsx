@@ -10,6 +10,11 @@ const languages = [
   { code: 'es', name: 'Español', flag: '🇲🇽' },
 ] as const
 
+// Scroll behavior configuration
+const SCROLL_THRESHOLD_SHOW = 10 // Show button when near top
+const SCROLL_THRESHOLD_HIDE = 100 // Hide button after scrolling this far down
+const SCROLL_THROTTLE_MS = 100 // Throttle scroll events to this interval
+
 export function LanguageSwitcher() {
   const [open, setOpen] = useState(false)
   const [isVisible, setIsVisible] = useState(true)
@@ -24,22 +29,22 @@ export function LanguageSwitcher() {
         clearTimeout(timeoutId.current)
       }
       
-      // Throttle scroll event to every 100ms
+      // Throttle scroll event
       timeoutId.current = setTimeout(() => {
         if (typeof window === 'undefined') return
         
         const currentScrollY = window.scrollY
         
         // Show when scrolling up or at the top
-        if (currentScrollY < lastScrollY.current || currentScrollY < 10) {
+        if (currentScrollY < lastScrollY.current || currentScrollY < SCROLL_THRESHOLD_SHOW) {
           setIsVisible(true)
-        } else if (currentScrollY > lastScrollY.current && currentScrollY > 100) {
-          // Hide when scrolling down and past 100px
+        } else if (currentScrollY > lastScrollY.current && currentScrollY > SCROLL_THRESHOLD_HIDE) {
+          // Hide when scrolling down and past threshold
           setIsVisible(false)
         }
         
         lastScrollY.current = currentScrollY
-      }, 100)
+      }, SCROLL_THROTTLE_MS)
     }
 
     if (typeof window !== 'undefined') {
