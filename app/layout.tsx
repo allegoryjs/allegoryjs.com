@@ -43,7 +43,6 @@ export default function RootLayout({
         <Analytics />
         <Script
           data-goatcounter="https://allegoryjs.goatcounter.com/count"
-          async
           src="https://gc.zgo.at/count.js"
           strategy="afterInteractive"
         />
