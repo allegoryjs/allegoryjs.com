@@ -1,18 +1,54 @@
 "use client"
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Globe } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useI18n } from '@/lib/i18n'
 
 const languages = [
   { code: 'en', name: 'English', flag: '🇺🇸' },
-  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'es', name: 'Español', flag: '🇲🇽' },
 ] as const
 
 export function LanguageSwitcher() {
   const [open, setOpen] = useState(false)
+  const [isVisible, setIsVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
   const { locale, setLocale, t } = useI18n()
+
+  useEffect(() => {
+    let timeoutId: NodeJS.Timeout
+    
+    const handleScroll = () => {
+      // Clear the previous timeout
+      clearTimeout(timeoutId)
+      
+      // Throttle scroll event to every 100ms
+      timeoutId = setTimeout(() => {
+        if (typeof window === 'undefined') return
+        
+        const currentScrollY = window.scrollY
+        
+        // Show when scrolling up or at the top
+        if (currentScrollY < lastScrollY || currentScrollY < 10) {
+          setIsVisible(true)
+        } else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+          // Hide when scrolling down and past 100px
+          setIsVisible(false)
+        }
+        
+        setLastScrollY(currentScrollY)
+      }, 100)
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll, { passive: true })
+      return () => {
+        window.removeEventListener('scroll', handleScroll)
+        clearTimeout(timeoutId)
+      }
+    }
+  }, [lastScrollY])
 
   const handleLanguageChange = (languageCode: 'en' | 'es') => {
     setLocale(languageCode)
@@ -23,10 +59,12 @@ export function LanguageSwitcher() {
     <Dialog.Root open={open} onOpenChange={setOpen}>
       <Dialog.Trigger asChild>
         <button
-          className="fixed top-6 right-6 z-50 p-3 bg-background border border-border rounded-full hover:bg-accent/10 hover:border-accent/50 transition-colors shadow-lg"
+          className={`fixed top-6 right-6 z-50 p-3 bg-background border border-accent/50 rounded-full hover:bg-accent/10 hover:border-accent transition-all shadow-lg ${
+            isVisible ? 'translate-y-0 opacity-100' : '-translate-y-20 opacity-0 pointer-events-none'
+          }`}
           aria-label="Change language"
         >
-          <Globe className="w-5 h-5 text-foreground" />
+          <Globe className="w-5 h-5 text-accent" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
