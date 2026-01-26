@@ -6,7 +6,7 @@ export function Hero() {
   const { t } = useI18n()
 
   return (
-    <section className="relative px-6 py-10 md:min-h-[90vh] md:flex md:flex-col md:justify-center overflow-hidden">
+    <section className="relative px-6 py-10 md:min-h-[90svh] md:flex md:flex-col md:justify-center overflow-hidden">
       <div className="max-w-4xl mx-auto text-center relative">
         {/* Development badge */}
         <div className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 text-xs text-muted-foreground border border-border/60 rounded-full bg-background/60">
