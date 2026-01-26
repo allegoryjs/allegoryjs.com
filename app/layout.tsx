@@ -4,6 +4,7 @@ import { Lora, JetBrains_Mono } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import { I18nProvider } from '@/lib/i18n'
+import { ClientLayout } from '@/components/client-layout'
 import './globals.css'
 
 const _lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -63,7 +64,9 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans antialiased`}>
         <I18nProvider>
-          {children}
+          <ClientLayout>
+            {children}
+          </ClientLayout>
         </I18nProvider>
         <Analytics />
         <Script

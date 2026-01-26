@@ -2,6 +2,7 @@
 
 import useSWR from "swr"
 import { useI18n } from '@/lib/i18n'
+import { useCallback } from 'react'
 
 interface Commit {
   sha: string
@@ -44,7 +45,7 @@ export function GitHubCommits() {
     }
   )
 
-  const formatDate = (dateString: string) => {
+  const formatDate = useCallback((dateString: string) => {
     const date = new Date(dateString)
     const now = new Date()
     const diffInMs = now.getTime() - date.getTime()
@@ -55,7 +56,7 @@ export function GitHubCommits() {
     if (diffInDays < 7) return t('githubCommits.daysAgo', { count: diffInDays })
     if (diffInDays < 30) return t('githubCommits.weeksAgo', { count: Math.floor(diffInDays / 7) })
     return date.toLocaleDateString(locale === 'es' ? 'es-ES' : 'en-US', { month: "short", day: "numeric" })
-  }
+  }, [t, locale])
 
   return (
     <section className="px-6 py-16 md:py-24">
