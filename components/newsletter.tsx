@@ -48,7 +48,7 @@ export function Newsletter() {
           Stay in the Story
         </h2>
         <p className="text-muted-foreground mb-8">
-          Get occasional updates on AllegoryJS development, new features, and 
+          Get occasional updates on Allegory.js development, new features, and 
           insights into building interactive fiction for the web.
         </p>
 

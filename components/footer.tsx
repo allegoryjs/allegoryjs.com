@@ -6,7 +6,7 @@ export function Footer() {
           <div className="text-center md:text-left">
             <div className="font-serif text-xl mb-1">
               <span className="text-primary">Allegory</span>
-              <span className="text-muted-foreground font-normal">JS</span>
+              <span className="text-muted-foreground font-normal">.js</span>
             </div>
             <p className="text-sm text-muted-foreground">
               A web-native interactive fiction engine
@@ -47,6 +47,9 @@ export function Footer() {
         <div className="mt-8 pt-6 border-t border-border text-center">
           <p className="text-xs text-muted-foreground">
             Made with care for storytellers and builders.
+          </p>
+          <p className="mt-2 text-xs text-muted-foreground">
+            © {new Date().getFullYear()} Allegory.js. All rights reserved.
           </p>
         </div>
       </div>

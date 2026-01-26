@@ -8,8 +8,8 @@ const _lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
-  title: 'AllegoryJS - A Web-Native Interactive Fiction Engine',
-  description: 'Build immersive, simulation-driven interactive fiction for the web. AllegoryJS bridges parser-based narratives with systemic game design.',
+  title: 'Allegory.js - A Web-Native Interactive Fiction Engine',
+  description: 'Build immersive, simulation-driven interactive fiction for the web. Allegory.js bridges parser-based narratives with systemic game design.',
   generator: 'v0.app',
   icons: {
     icon: [

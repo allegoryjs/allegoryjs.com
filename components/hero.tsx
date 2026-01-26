@@ -3,32 +3,29 @@ export function Hero() {
     <section className="relative px-6 py-20 md:py-32 overflow-hidden">
       {/* Decorative book page texture overlay */}
       <div className="absolute inset-0 opacity-30 pointer-events-none bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMDAiIGhlaWdodD0iMTAwIj48ZmlsdGVyIGlkPSJuIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC44IiBudW1PY3RhdmVzPSI0IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsdGVyPSJ1cmwoI24pIiBvcGFjaXR5PSIwLjA1Ii8+PC9zdmc+')]" />
-      
+
       <div className="max-w-4xl mx-auto text-center relative">
-        {/* Development badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 mb-8 text-sm border border-accent/50 rounded-full bg-accent/10 text-primary">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-          </span>
-          Under Active Development
-        </div>
-        
-        <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif tracking-tight mb-6 text-balance">
-          <span className="text-primary">Allegory</span>
-          <span className="text-muted-foreground font-normal">JS</span>
+        <h1 className="mb-6 flex justify-center">
+          <span className="sr-only">Allegory.js</span>
+          <div className="w-[min(90vw,520px)]">
+            <img
+              src="/allegory_logo_horizontal.png"
+              alt="Allegory.js"
+              className="w-full h-auto object-contain dark:invert dark:sepia-[0.7]"
+            />
+          </div>
         </h1>
-        
+
         <p className="text-xl md:text-2xl text-muted-foreground mb-4 font-serif italic">
           A Web-Native Interactive Fiction Engine
         </p>
-        
+
         <p className="text-lg text-foreground/80 max-w-2xl mx-auto mb-10 leading-relaxed">
-          Bridge the gap between parser-based narratives and systemic game design 
-          with a fluent API that gets out of the way, so you can focus on building 
+          Bridge the gap between parser-based narratives and systemic game design
+          with a fluent API that gets out of the way, so you can focus on building
           your dream game.
         </p>
-        
+
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="https://github.com/allegoryjs/allegoryjs"
@@ -48,8 +45,17 @@ export function Hero() {
             Get Updates
           </a>
         </div>
+
+        {/* Development badge */}
+        <div className="mt-6 inline-flex items-center gap-2 px-3 py-1.5 text-xs text-muted-foreground border border-border/60 rounded-full bg-background/60">
+          <span className="relative flex h-1.5 w-1.5">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent/60 opacity-60"></span>
+            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent/70"></span>
+          </span>
+          Under Active Development
+        </div>
       </div>
-      
+
       {/* Decorative divider */}
       <div className="max-w-md mx-auto mt-20 flex items-center gap-4">
         <div className="flex-1 h-px bg-border"></div>

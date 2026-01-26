@@ -59,7 +59,7 @@ export function HowItWorks() {
             How It Works
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            AllegoryJS reimagines interactive fiction by treating stories as living simulations 
+            Allegory.js reimagines interactive fiction by treating stories as living simulations 
             rather than branching trees.
           </p>
         </header>

@@ -70,7 +70,7 @@ export function GitHubCommits() {
             Recent Activity
           </h2>
           <p className="text-muted-foreground">
-            Follow along as we build AllegoryJS in the open.
+            Follow along as we build Allegory.js in the open.
           </p>
         </header>
 
