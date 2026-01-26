@@ -55,10 +55,10 @@ export function HowItWorks() {
   ]
 
   return (
-    <section className="px-6 py-16 md:py-24 bg-card">
+    <section className="px-6 py-16 md:py-24 bg-card" aria-labelledby="how-it-works-heading">
       <div className="max-w-5xl mx-auto">
         <header className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-serif mb-4 text-card-foreground">
+          <h2 id="how-it-works-heading" className="text-3xl md:text-4xl font-serif mb-4 text-card-foreground">
             {t('howItWorks.title')}
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -67,13 +67,14 @@ export function HowItWorks() {
         </header>
 
         {/* Core Philosophy Cards */}
-        <div className="grid md:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-3 gap-6 mb-16" role="list" aria-label="Core features">
           {features.map((feature) => (
             <article
               key={feature.title}
               className="p-6 bg-background rounded-lg border border-border hover:border-accent/50 transition-colors"
+              role="listitem"
             >
-              <div className="text-accent mb-4">{feature.icon}</div>
+              <div className="text-accent mb-4" aria-hidden="true">{feature.icon}</div>
               <h3 className="text-xl font-serif mb-2 text-foreground">{feature.title}</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {feature.description}
@@ -87,10 +88,10 @@ export function HowItWorks() {
           <h3 className="text-xl font-serif mb-6 text-foreground text-center">
             {t('howItWorks.underTheHood')}
           </h3>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid sm:grid-cols-2 gap-6" role="list" aria-label="Architecture components">
             {architecture.map((item, index) => (
-              <div key={item.label} className="flex gap-4">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center font-mono text-sm">
+              <div key={item.label} className="flex gap-4" role="listitem">
+                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-accent/20 text-accent flex items-center justify-center font-mono text-sm" aria-hidden="true">
                   {index + 1}
                 </div>
                 <div>
@@ -105,12 +106,12 @@ export function HowItWorks() {
         {/* Code Example */}
         <div className="mt-12 bg-foreground/5 rounded-lg border border-border overflow-hidden">
           <div className="px-4 py-2 bg-foreground/5 border-b border-border flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-destructive/50"></div>
-            <div className="w-3 h-3 rounded-full bg-accent/50"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500/50"></div>
+            <div className="w-3 h-3 rounded-full bg-destructive/50" aria-hidden="true"></div>
+            <div className="w-3 h-3 rounded-full bg-accent/50" aria-hidden="true"></div>
+            <div className="w-3 h-3 rounded-full bg-green-500/50" aria-hidden="true"></div>
             <span className="ml-2 text-xs text-muted-foreground font-mono">{t('howItWorks.codeExample')}</span>
           </div>
-          <pre className="p-6 text-sm overflow-x-auto">
+          <pre className="p-6 text-sm overflow-x-auto" role="region" aria-label="Code example">
             <code className="text-foreground font-mono">
 {`// Define entities with a fluent API
 ThereIsAContainer('chest')

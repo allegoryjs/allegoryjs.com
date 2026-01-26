@@ -11,9 +11,21 @@ const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://allegoryjs.com'),
   title: 'Allegory.js - A Web-Native Interactive Fiction Engine',
   description: 'Build immersive, simulation-driven interactive fiction for the web. Allegory.js bridges parser-based narratives with systemic game design.',
   generator: 'v0.app',
+  keywords: ['interactive fiction', 'game engine', 'web development', 'simulation', 'parser', 'narrative design', 'JavaScript', 'TypeScript'],
+  authors: [{ name: 'Allegory.js Team' }],
+  creator: 'Allegory.js Team',
+  publisher: 'Allegory.js',
+  alternates: {
+    canonical: 'https://allegoryjs.com',
+    languages: {
+      'en': 'https://allegoryjs.com',
+      'es': 'https://allegoryjs.com',
+    },
+  },
   icons: {
     icon: [
       {
@@ -53,6 +65,17 @@ export const metadata: Metadata = {
     description: 'Build immersive, simulation-driven interactive fiction for the web. Allegory.js bridges parser-based narratives with systemic game design.',
     images: ['/og-image.png'],
   },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 }
 
 export default function RootLayout({
@@ -60,8 +83,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Allegory.js',
+    description: 'A web-native interactive fiction engine that bridges parser-based narratives with systemic game design',
+    applicationCategory: 'DeveloperApplication',
+    operatingSystem: 'Web Browser',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'USD',
+    },
+    author: {
+      '@type': 'Organization',
+      name: 'Allegory.js Team',
+    },
+    url: 'https://allegoryjs.com',
+    codeRepository: 'https://github.com/allegoryjs/allegoryjs',
+    programmingLanguage: ['JavaScript', 'TypeScript'],
+  }
+
   return (
     <html lang="en" className={`${lora.variable} ${jetbrainsMono.variable}`}>
+      <head>
+        <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`font-sans antialiased`}>
         <I18nProvider>
           <ClientLayout>
