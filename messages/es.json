@@ -68,7 +68,10 @@
     "tryAgain": "Intentar de nuevo",
     "successTitle": "¡Ya estás en la lista!",
     "successMessage": "Nos pondremos en contacto cuando haya algo que valga la pena compartir.",
-    "disclaimer": "Sin spam. Date de baja en cualquier momento."
+    "disclaimer": "Sin spam. Date de baja en cualquier momento.",
+    "loadingStatus": "Suscribiéndote al boletín...",
+    "successStatus": "¡Te has suscrito exitosamente al boletín!",
+    "errorStatus": "Error al suscribirse al boletín. Inténtalo de nuevo."
   },
   "footer": {
     "tagline": "Un motor de ficción interactiva nativo de la web",
@@ -82,6 +85,17 @@
     "title": "Seleccionar idioma",
     "description": "Elige tu idioma preferido",
     "close": "Cerrar"
+  },
+  "accessibility": {
+    "skipToContent": "Saltar al contenido principal",
+    "footerNavigation": "Navegación del pie de página",
+    "recentCommits": "Commits recientes",
+    "avatarFor": "Avatar de {name}",
+    "coreFeatures": "Características principales",
+    "architectureComponents": "Componentes de arquitectura",
+    "codeExample": "Ejemplo de código",
+    "changeLanguage": "Cambiar idioma",
+    "newsletterForm": "Formulario de suscripción al boletín"
   },
   "metadata": {
     "title": "Allegory.js - Un motor de ficción interactiva nativo de la web",
