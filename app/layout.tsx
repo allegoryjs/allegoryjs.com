@@ -7,8 +7,8 @@ import { I18nProvider } from '@/lib/i18n'
 import { ClientLayout } from '@/components/client-layout'
 import './globals.css'
 
-const _lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
-const _jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
+const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
+const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jetbrains" });
 
 export const metadata: Metadata = {
   title: 'Allegory.js - A Web-Native Interactive Fiction Engine',
@@ -61,7 +61,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${lora.variable} ${jetbrainsMono.variable}`}>
       <body className={`font-sans antialiased`}>
         <I18nProvider>
           <ClientLayout>
