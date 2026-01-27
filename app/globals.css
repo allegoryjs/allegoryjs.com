@@ -1,5 +1,4 @@
 @import 'tailwindcss';
-@import 'tw-animate-css';
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 
@@ -106,8 +105,8 @@
 }
 
 @theme inline {
-  --font-sans: 'Lora', 'Georgia', serif;
-  --font-mono: 'JetBrains Mono', 'Geist Mono', monospace;
+  --font-sans: var(--font-lora), 'Lora', 'Georgia', serif;
+  --font-mono: var(--font-jetbrains), 'JetBrains Mono', 'Geist Mono', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -154,4 +153,22 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Accessibility: Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Ensure focus is visible for keyboard navigation */
+*:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
 }
