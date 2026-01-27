@@ -129,7 +129,7 @@ export function HowItWorks() {
                 }
               }}
             >
-{`// Define entities with a fluent API
+{`// "Open box", "Lift lid", or "Check chest" all map to this handler automatically:
 ThereIsAContainer('chest')
     .withCapacity(10)
     .containing('golden-key')
