@@ -112,7 +112,7 @@ export function HowItWorks() {
             <span className="ml-2 text-xs text-muted-foreground font-mono">{t('howItWorks.codeExample')}</span>
           </div>
           <pre className="p-6 text-sm overflow-x-auto" role="region" aria-label={t('accessibility.codeExample')}>
-            <code className="text-foreground font-mono">
+            <code className="language-javascript text-foreground font-mono">
 {`// Define entities with a fluent API
 ThereIsAContainer('chest')
     .withCapacity(10)
