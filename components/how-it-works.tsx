@@ -1,6 +1,8 @@
 "use client"
 
 import { useI18n } from '@/lib/i18n'
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { oneDark } from 'react-syntax-highlighter/dist/esm/styles/prism'
 
 export function HowItWorks() {
   const { t } = useI18n()
@@ -111,8 +113,22 @@ export function HowItWorks() {
             <div className="w-3 h-3 rounded-full bg-green-500/50" aria-hidden="true"></div>
             <span className="ml-2 text-xs text-muted-foreground font-mono">{t('howItWorks.codeExample')}</span>
           </div>
-          <pre className="p-6 text-sm overflow-x-auto" role="region" aria-label={t('accessibility.codeExample')}>
-            <code className="text-foreground font-mono">
+          <div role="region" aria-label={t('accessibility.codeExample')}>
+            <SyntaxHighlighter
+              language="javascript"
+              style={oneDark}
+              customStyle={{
+                margin: 0,
+                padding: '1.5rem',
+                fontSize: '0.875rem',
+                background: 'transparent',
+              }}
+              codeTagProps={{
+                style: {
+                  fontFamily: 'var(--font-mono)',
+                }
+              }}
+            >
 {`// Define entities with a fluent API
 ThereIsAContainer('chest')
     .withCapacity(10)
@@ -123,8 +139,8 @@ ThereIsAContainer('chest')
         }
         return Success("The lid creaks open, revealing treasures within.");
     });`}
-            </code>
-          </pre>
+            </SyntaxHighlighter>
+          </div>
         </div>
       </div>
     </section>
