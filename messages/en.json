@@ -58,7 +58,7 @@
     "viewAllCommits": "View all commits on GitHub →"
   },
   "newsletter": {
-    "title": "Get early access",
+    "title": "Stay up to date",
     "subtitle": "Get occasional updates on Allegory.js development, new features, and insights into building interactive fiction for the web.",
     "emailPlaceholder": "your@email.com",
     "emailLabel": "Email address",
