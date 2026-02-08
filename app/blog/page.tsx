@@ -1,4 +1,4 @@
-import { getAllBlogPosts, extractTitle } from "@/lib/blog"
+import { getAllBlogPosts } from "@/lib/blog"
 import { BlogNav } from "@/components/blog-nav"
 import { BlogPostRenderer } from "@/components/blog-post-renderer"
 
@@ -13,9 +13,7 @@ export default function BlogPage() {
         {posts.length === 0 && (
           <p className="text-center text-muted-foreground">No blog posts yet.</p>
         )}
-        {posts.map((post) => {
-          const title = extractTitle(post.rawContent)
-          return (
+        {posts.map((post) => (
             <article
               key={post.slug}
               id={`post-${post.slug}`}
@@ -40,8 +38,7 @@ export default function BlogPage() {
                 <BlogPostRenderer source={post.rawContent} />
               </div>
             </article>
-          )
-        })}
+        ))}
       </div>
     </main>
   )

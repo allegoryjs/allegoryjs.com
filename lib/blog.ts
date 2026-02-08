@@ -6,6 +6,7 @@ export interface BlogPost {
   number: number
   date: string
   dateLabel: string
+  title: string
   rawContent: string
 }
 
@@ -19,14 +20,19 @@ function parseDateFromFilename(filename: string): { number: number; date: string
   const number = parseInt(numStr, 10)
 
   // Parse "feb-08-2026" into a readable date label
-  const [monthAbbr, day, year] = dateStr.split("-")
+  const parts = dateStr.split("-")
+  if (parts.length !== 3) {
+    return { number, date: dateStr, dateLabel: dateStr }
+  }
+  const [monthAbbr, day, year] = parts
   const monthMap: Record<string, string> = {
     jan: "January", feb: "February", mar: "March", apr: "April",
     may: "May", jun: "June", jul: "July", aug: "August",
     sep: "September", oct: "October", nov: "November", dec: "December",
   }
   const monthFull = monthMap[monthAbbr.toLowerCase()] || monthAbbr
-  const dateLabel = `${monthFull} ${parseInt(day, 10)}, ${year}`
+  const dayNum = parseInt(day, 10)
+  const dateLabel = `${monthFull} ${isNaN(dayNum) ? day : dayNum}, ${year}`
 
   return { number, date: dateStr, dateLabel }
 }
@@ -41,7 +47,7 @@ export function getAllBlogPosts(): BlogPost[] {
     const rawContent = fs.readFileSync(path.join(BLOG_DIR, filename), "utf-8")
     const slug = filename.replace(/\.mdx$/, "")
 
-    return { slug, number, date, dateLabel, rawContent }
+    return { slug, number, date, dateLabel, title: extractTitle(rawContent), rawContent }
   })
 
   // Sort newest first (highest number = newest)
