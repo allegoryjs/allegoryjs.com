@@ -2,24 +2,24 @@
   "hero": {
     "underDevelopment": "En desarrollo activo",
     "tagline": "Un motor de ficción interactiva nativo de la web",
-    "description": "Cierra la brecha entre narrativas basadas en parser y el diseño de juegos sistémico con una API fluida que no estorba, para que puedas concentrarte en construir el juego de tus sueños.",
+    "description": "Une la narrativa basada en texto con el diseño sistémico de juegos. Crea simulaciones vivas con lenguaje natural, gestionadas por un ECS moderno, directamente en tu navegador.",
     "viewOnGitHub": "Ver en GitHub",
     "getUpdates": "Recibir actualizaciones"
   },
   "howItWorks": {
     "title": "Cómo funciona",
-    "subtitle": "Allegory.js reimagina la ficción interactiva al tratar las historias como simulaciones vivas en lugar de árboles ramificados.",
+    "subtitle": "Allegory.js reinventa la ficción interactiva tratando las historias como simulaciones vivas en lugar de árboles de decisiones.",
     "simulationFirst": {
-      "title": "Primero la simulación",
-      "description": "El estado del mundo se gestiona mediante una simulación de física y lógica, no a través de un árbol narrativo. Cada objeto, personaje y regla existe en un mundo vivo y reactivo."
+      "title": "Simulación primero",
+      "description": "El estado del mundo se gestiona mediante una simulación de física y lógica, no por un árbol narrativo. Cada objeto, personaje y regla existe en un mundo vivo y reactivo."
     },
     "eventDriven": {
-      "title": "Orientado a eventos",
-      "description": "Sin loop de juego a 60 FPS. El motor permanece inactivo hasta que ocurre una entrada del usuario o un evento del sistema, lo que lo hace ideal para experiencias centradas en la narrativa."
+      "title": "Basado en eventos",
+      "description": "Sin bucles de juego de 60fps. El motor reposa hasta que ocurre una entrada del usuario o un evento del sistema, haciéndolo perfecto para experiencias narrativas."
     },
     "webNative": {
       "title": "Nativo de la web",
-      "description": "Construido sobre TypeScript/ESM estándar. Aprovecha el ecosistema del navegador —CSS, WebGL, Web Audio— sin compiladores ni herramientas propietarias."
+      "description": "Construido sobre TypeScript/ESM estándar. Aprovecha el ecosistema del navegador (CSS, WebGL, Web Audio) sin compiladores ni herramientas propietarias."
     },
     "underTheHood": "Bajo el capó",
     "architecture": {
@@ -28,16 +28,16 @@
         "description": "Entidades, Componentes y Sistemas tratan tu mundo como una base de datos relacional."
       },
       "semanticNLP": {
-        "label": "PLN semántico",
-        "description": "Clasificación de intención mediante embeddings, no análisis rígido de cadenas."
+        "label": "PNL Semántico",
+        "description": "Clasificación de intenciones vía embeddings, no por análisis rígido de texto."
       },
       "lawsMiddleware": {
-        "label": "Leyes y middleware",
+        "label": "Leyes y Middleware",
         "description": "Lógica desacoplada con puntuación automática de especificidad y resolución de conflictos."
       },
       "reactiveEventBus": {
         "label": "Bus de eventos reactivo",
-        "description": "Los NPC y los sistemas responden a los cambios del mundo, permitiendo comportamientos emergentes."
+        "description": "Los NPCs y sistemas responden a cambios en el mundo, permitiendo un comportamiento emergente."
       }
     },
     "codeExample": "ejemplo.js"
@@ -45,7 +45,7 @@
   "githubCommits": {
     "activeDevelopment": "Desarrollo activo",
     "title": "Actividad reciente",
-    "subtitle": "Sigue el desarrollo abierto de Allegory.js.",
+    "subtitle": "Sigue nuestro progreso mientras construimos Allegory.js en abierto.",
     "repository": "allegoryjs/allegoryjs",
     "unableToLoad": "No se pudieron cargar los commits en este momento.",
     "viewOnGitHub": "Ver en GitHub",
@@ -54,28 +54,28 @@
     "daysAgo": "hace {count} días",
     "weeksAgo": "hace {count} semanas",
     "repositoryNotFound": "Repositorio no encontrado o sin commits disponibles.",
-    "checkRepository": "Verificar repositorio",
+    "checkRepository": "Revisar repositorio",
     "viewAllCommits": "Ver todos los commits en GitHub →"
   },
   "newsletter": {
-    "title": "Mantente en la historia",
+    "title": "Mantente al día",
     "subtitle": "Recibe actualizaciones ocasionales sobre el desarrollo de Allegory.js, nuevas funcionalidades e ideas sobre cómo crear ficción interactiva para la web.",
-    "emailPlaceholder": "tu@email.com",
-    "emailLabel": "Correo electrónico",
+    "emailPlaceholder": "tu@correo.com",
+    "emailLabel": "Dirección de correo",
     "subscribe": "Suscribirse",
-    "subscribing": "Suscribiéndote...",
-    "errorMessage": "Algo salió mal. Inténtalo de nuevo.",
+    "subscribing": "Suscribiendo...",
+    "errorMessage": "Algo salió mal. Por favor intenta de nuevo.",
     "tryAgain": "Intentar de nuevo",
-    "successTitle": "¡Ya estás en la lista!",
-    "successMessage": "Nos pondremos en contacto cuando haya algo que valga la pena compartir.",
-    "disclaimer": "Sin spam. Date de baja en cualquier momento.",
-    "loadingStatus": "Suscribiéndote al boletín...",
-    "successStatus": "¡Te has suscrito exitosamente al boletín!",
-    "errorStatus": "Error al suscribirse al boletín. Inténtalo de nuevo."
+    "successTitle": "¡Estás en la lista!",
+    "successMessage": "Estaremos en contacto cuando haya algo que valga la pena compartir.",
+    "disclaimer": "Sin spam, nunca. Date de baja cuando quieras.",
+    "loadingStatus": "Suscribiendo al boletín...",
+    "successStatus": "¡Suscripción al boletín exitosa!",
+    "errorStatus": "Error al suscribirse. Por favor intenta de nuevo."
   },
   "footer": {
     "tagline": "Un motor de ficción interactiva nativo de la web",
-    "githubLabel": "Repositorio en GitHub",
+    "githubLabel": "Repositorio de GitHub",
     "discussions": "Discusiones",
     "issues": "Issues",
     "madeWith": "Hecho con cariño para narradores y creadores.",
@@ -99,6 +99,6 @@
   },
   "metadata": {
     "title": "Allegory.js - Un motor de ficción interactiva nativo de la web",
-    "description": "Construye ficción interactiva inmersiva y basada en simulación para la web. Allegory.js conecta narrativas basadas en parser con el diseño de juegos sistémico."
+    "description": "Crea ficción interactiva inmersiva basada en simulación para la web. Allegory.js une las narrativas de texto con el diseño sistémico de juegos."
   }
 }

@@ -2,7 +2,7 @@
   "hero": {
     "underDevelopment": "Under Active Development",
     "tagline": "A Web-Native Interactive Fiction Engine",
-    "description": "Bridge the gap between parser-based narratives and systemic game design with a fluent API that gets out of the way, so you can focus on building your dream game.",
+    "description": "Bridge the gap between parser-based narratives and systemic game design. Write living simulations with natural language, managed by a modern ECS, directly in the browser.",
     "viewOnGitHub": "View on GitHub",
     "getUpdates": "Get Updates"
   },
@@ -58,7 +58,7 @@
     "viewAllCommits": "View all commits on GitHub →"
   },
   "newsletter": {
-    "title": "Stay in the Story",
+    "title": "Stay up to date",
     "subtitle": "Get occasional updates on Allegory.js development, new features, and insights into building interactive fiction for the web.",
     "emailPlaceholder": "your@email.com",
     "emailLabel": "Email address",

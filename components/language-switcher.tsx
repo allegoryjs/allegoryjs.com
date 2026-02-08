@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
-import { Globe } from 'lucide-react'
+import { Languages } from 'lucide-react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { useI18n } from '@/lib/i18n'
 
@@ -67,7 +67,7 @@ export function LanguageSwitcher() {
           }`}
           aria-label={t('accessibility.changeLanguage')}
         >
-          <Globe className="w-5 h-5 text-primary" />
+          <Languages className="w-5 h-5 text-primary" />
         </button>
       </Dialog.Trigger>
       <Dialog.Portal>
