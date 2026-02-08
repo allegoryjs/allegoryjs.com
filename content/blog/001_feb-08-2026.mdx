@@ -1,0 +1,94 @@
+import { BlogFooter } from '../../src/components/blog-footer.jsx'
+
+# Beyond Branching and Scripting: The Philosophy of Allegory.js
+
+## The State of Affairs
+If you want to make an Interactive Fiction (IF) game, you have
+your pick of some really powerful and well-established tools, as well as some very cool
+newer choices. The main tools in this space these days are [Twine](https://twinery.org/),
+[Inform 7](https://ganelson.github.io/inform-website/), and [Ink](https://www.inklestudios.com/ink/)
+("_the big three_").
+Some other options are [Ren'Py](https://www.renpy.org/),
+[ChoiceScript](https://www.choiceofgames.com/make-your-own-games/choicescript-intro/),
+[Adventuron](https://adventuron.io/), and [Narrat](https://narrat.dev/).
+**These tools are all amazing.** Go check them out, seriously.
+The big three have huge communities, lots of resources, and they're all free to use.
+
+Twine is unmatched for Choose Your Own Adventure (CYOA) games,
+which typically lean heavily into the narrative side of things; you end up with branching
+paths of hyperlinked webpages constituting your game. These are perfectly suited to
+the style of adventure where the player/reader is presented with some choices
+(_do you want to take the left or right door?_) and each one takes you down a set path.
+Think, the old Goosebumps books, where you skip to page 46 if you choose left, and 73 if
+you choose to go right, but way more powerful and well-suited for nonlinear narratives.
+However, for games where you need to track state and have reactive
+systems (e.g. you can pick up a key in the beginning of the game, and that
+stays in your inventory until the end of the game, where if you have the key, you can
+unlock a secret door; or you pick up an apple, and over time, it rots if you don't eat it),
+you run into some of the limitations of the engine. You *have to rely on macros which
+aren't the prettiest or most intuitive to use*, and you can end up with *a lot of if-else
+checks for logic* all over the place.
+
+Inform 7 is a masterclass in developer experience and game world simulation. The plain English-like
+programming language you use to create games in Inform is frankly astonishing. You write
+code like "A car is a type of thing. A car has four doors. A door can be open or closed,"
+and so on, to build the rules of your game universe. The compiler takes care of the data
+and simulation based on this expressive code, and as the player you can walk around,
+pick things up, open and close doors and containers--all sorts of things that make the
+game feel richly detailed. However, it has a few usability issues. The game developer
+needs to think of all synonyms and ways of expressing ideas, and if they miss something,
+you can end up in a situation where the engine doesn't understand it if you type
+"attack the goblin with the sword," and the player needs to figure out the special keywords,
+which might be something like "use sword on goblin". *This can break immersion and frustrate the player*,
+and create a bit of a *learning curve for players*. Also, the engine generates images that
+run in a VM; there are implementations of the VM for the web, but *in terms of accessibility
+and styling, you have very few options*. You are locked in to a Zork-style text adventure
+that some people (such as vision-impaired individuals) don't get to enjoy.
+
+Ink is a really cool tool that excels at narrative branching and dialogue scripting. It
+is made as a sort of middleware that allows game devs to write their games' flows in a
+way that reads like a screenplay. It plugs into game engines like Unity to enable all
+sorts of audio-visual accompaniments and great console exportability. However, Ink itself
+*does not provide a way to author game logic*. If you want an inventory system, you have to
+write it in the "host" game engine itself. It's perfect for defining text flows,
+but *isn't "batteries included"* when it comes to other types of functionality.
+
+There are lots of other awesome tools and engines in the IF space, and they each
+bring unique strengths to the table. They are all absolutely worth looking into,
+and one of them may be the perfect tool for making your game. So where does Allegory.js
+fit in?
+
+## An Engine for the Modern Web
+> Allegory.js is a web-native IF game engine with NLP capabilities and an ergonomic API
+
+Allegory.js humbly builds on ideas of the titans which came before it, and it also
+has a few new tricks up its sleeve. Allegory.js aims to:
+- enable players to declare what they want to do (or even ask if they can do it), without memorizing special keywords and syntax, e.g.
+    > "can I break that window with the rock?"
+    > "slash at that goblin"
+    > "talk to the guy with the hat"
+- provide a fluent API that gets out of the game developer's way
+    ```javascript
+    ThereIsAContainer('old_chest')
+        .containing('rusty_key')
+        .onIntent('OPEN', () => Success("It creaks open."));
+    ```
+- enable a quick development cycle out of the box for most people, while also giving the relentlessly "think-outside-the-box" 1% of game devs the tools to do whatever they can dream up
+- empower game devs to create a wide variety of games, from systems-light CYOA to hardcore simulation
+- put the full breadth of the JS/TS ecosystem at IF game devs' disposal
+- give all types of players access to games by baking in support for web accessibility tools and internationalization
+- make use of emerging machine learning techniques to make development faster while leaving the creative vision solely in the hands of the developer
+- ship in a tiny, efficient package that can run just as well on low-end phones as powerful desktops
+- be able to do everything locally in the player's browser without necessarily needing to pay/wait for API calls
+
+The vision is a game engine that devs of all skill levels and creative inclinations will love to use.
+
+## What's Next?
+This is the first installment of the Allegory.js blog. In future posts, we'll mostly be discussing
+architectural decisions and topics we've explored in the process of making this engine.
+Always feel free to leave thoughts in the GitHub discussions. Allegory.js is still in its infancy,
+and you are invited to follow along as it grows.
+
+Until next time, thanks for stopping by, and take care!
+
+<BlogFooter />
