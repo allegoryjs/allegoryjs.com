@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import { I18nProvider } from '@/lib/i18n'
 import { ClientLayout } from '@/components/client-layout'
+import { VideoBackground } from '@/components/video-background'
 import './globals.css'
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -107,6 +108,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`font-sans antialiased`}>
+        <VideoBackground />
         <I18nProvider>
           <ClientLayout>
             {children}
