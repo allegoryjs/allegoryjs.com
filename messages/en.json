@@ -4,7 +4,8 @@
     "tagline": "A Web-Native Interactive Fiction Engine",
     "description": "Bridge the gap between parser-based narratives and systemic game design. Write living simulations with natural language, managed by a modern ECS, directly in the browser.",
     "viewOnGitHub": "View on GitHub",
-    "getUpdates": "Get Updates"
+    "getUpdates": "Get Updates",
+    "contactPrompt": "Questions? Reach out at"
   },
   "howItWorks": {
     "title": "How It Works",
@@ -69,6 +70,7 @@
     "successTitle": "You're on the list!",
     "successMessage": "We'll be in touch when there's something worth sharing.",
     "disclaimer": "No spam, ever. Unsubscribe anytime.",
+    "preferDirectContact": "Prefer direct contact? Email us at",
     "loadingStatus": "Subscribing to newsletter...",
     "successStatus": "Successfully subscribed to newsletter!",
     "errorStatus": "Error subscribing to newsletter. Please try again."
@@ -76,6 +78,7 @@
   "footer": {
     "tagline": "A web-native interactive fiction engine",
     "githubLabel": "GitHub Repository",
+    "contactLabel": "Contact us via email",
     "discussions": "Discussions",
     "issues": "Issues",
     "madeWith": "Made with care for storytellers and builders.",

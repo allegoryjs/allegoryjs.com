@@ -127,6 +127,16 @@ export function Newsletter() {
         <p className="text-xs text-muted-foreground mt-4">
           {t('newsletter.disclaimer')}
         </p>
+
+        <p className="text-sm text-muted-foreground mt-6">
+          {t('newsletter.preferDirectContact')}{' '}
+          <a
+            href="mailto:hello@allegoryjs.com"
+            className="text-primary hover:underline"
+          >
+            hello@allegoryjs.com
+          </a>
+        </p>
       </div>
     </section>
   )

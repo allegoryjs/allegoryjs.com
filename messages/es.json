@@ -4,7 +4,8 @@
     "tagline": "Un motor de ficción interactiva nativo de la web",
     "description": "Une la narrativa basada en texto con el diseño sistémico de juegos. Crea simulaciones vivas con lenguaje natural, gestionadas por un ECS moderno, directamente en tu navegador.",
     "viewOnGitHub": "Ver en GitHub",
-    "getUpdates": "Recibir actualizaciones"
+    "getUpdates": "Recibir actualizaciones",
+    "contactPrompt": "¿Preguntas? Escríbenos a"
   },
   "howItWorks": {
     "title": "Cómo funciona",
@@ -69,6 +70,7 @@
     "successTitle": "¡Estás en la lista!",
     "successMessage": "Estaremos en contacto cuando haya algo que valga la pena compartir.",
     "disclaimer": "Sin spam, nunca. Date de baja cuando quieras.",
+    "preferDirectContact": "¿Prefieres contacto directo? Escríbenos a",
     "loadingStatus": "Suscribiendo al boletín...",
     "successStatus": "¡Suscripción al boletín exitosa!",
     "errorStatus": "Error al suscribirse. Por favor intenta de nuevo."
@@ -76,6 +78,7 @@
   "footer": {
     "tagline": "Un motor de ficción interactiva nativo de la web",
     "githubLabel": "Repositorio de GitHub",
+    "contactLabel": "Contáctanos por correo",
     "discussions": "Discusiones",
     "issues": "Issues",
     "madeWith": "Hecho con cariño para narradores y creadores.",
