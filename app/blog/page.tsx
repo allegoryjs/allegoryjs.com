@@ -2,6 +2,7 @@ import { getAllBlogPosts } from "@/lib/blog"
 import { BlogNav } from "@/components/blog-nav"
 import { BlogPostRenderer } from "@/components/blog-post-renderer"
 import { BlogTableOfContents } from "@/components/blog-table-of-contents"
+import { ScrollToTopButton } from "@/components/scroll-to-top-button"
 
 export default function BlogPage() {
   const posts = getAllBlogPosts()
@@ -42,6 +43,7 @@ export default function BlogPage() {
             </article>
         ))}
       </div>
+      <ScrollToTopButton />
     </main>
   )
 }
