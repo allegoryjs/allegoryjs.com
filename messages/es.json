@@ -76,6 +76,7 @@
   "footer": {
     "tagline": "Un motor de ficción interactiva nativo de la web",
     "githubLabel": "Repositorio de GitHub",
+    "contactLabel": "Contáctanos por correo",
     "discussions": "Discusiones",
     "issues": "Issues",
     "madeWith": "Hecho con cariño para narradores y creadores.",

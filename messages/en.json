@@ -76,6 +76,7 @@
   "footer": {
     "tagline": "A web-native interactive fiction engine",
     "githubLabel": "GitHub Repository",
+    "contactLabel": "Contact us via email",
     "discussions": "Discussions",
     "issues": "Issues",
     "madeWith": "Made with care for storytellers and builders.",
