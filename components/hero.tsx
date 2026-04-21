@@ -68,6 +68,16 @@ export function Hero() {
             {t('hero.getUpdates')}
           </a>
         </div>
+
+        <p className="mt-6 text-sm text-muted-foreground">
+          {t('hero.contactPrompt')}{' '}
+          <a
+            href="mailto:hello@allegoryjs.com"
+            className="text-primary hover:underline"
+          >
+            hello@allegoryjs.com
+          </a>
+        </p>
       </div>
 
       {/* Decorative divider */}
