@@ -11,7 +11,7 @@ export default function BlogPage() {
       <BlogNav />
       <div className="max-w-3xl mx-auto px-6 py-12">
         <h1 className="text-4xl md:text-5xl font-serif mb-12 text-center">Blog</h1>
-        <BlogTableOfContents posts={posts.map(p => ({ slug: p.slug, title: p.title, blurb: p.blurb }))} />
+        <BlogTableOfContents posts={[...posts].reverse().map(p => ({ slug: p.slug, title: p.title, blurb: p.blurb, dateLabel: p.dateLabel }))} />
         {posts.length === 0 && (
           <p className="text-center text-muted-foreground">No blog posts yet.</p>
         )}
