@@ -35,7 +35,7 @@ export default function BlogPage() {
                 [&_pre]:bg-muted [&_pre]:p-4 [&_pre]:rounded-lg [&_pre]:overflow-x-auto [&_pre]:mb-4
                 [&_strong]:text-foreground [&_em]:text-foreground/80
               ">
-                <BlogPostRenderer source={post.rawContent} />
+                <BlogPostRenderer source={post.rawContent} id={`post-${post.slug}`} />
               </div>
             </article>
         ))}
