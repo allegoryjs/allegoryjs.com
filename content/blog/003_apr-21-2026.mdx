@@ -1,0 +1,145 @@
+import { BlogFooter } from '../../src/components/blog-footer.jsx'
+
+{/* blurb: Thoughts on making a truly intuitive, accessible game engine */}
+
+# How to Build a Cyberpunk Saloon Without Losing Your Mind
+
+There's one thing most game devs can agree on: **making a game is really damn hard**. It's difficult enough to come up with a cohesive idea for a game; having to translate your vision into engine API calls is an ordeal that causes many people to bounce off of game dev entirely. Allegory.js aims to eliminate this headache by delivering APIs crafted specifically for the type of game you want to make. Allegory.js is not the first project to try to do this. In particular, <a href="https://ganelson.github.io/inform-website/">Inform 7</a> deeply inspired the direction that Allegory.js is heading in. In Inform 7, you can write something like `The kitchen is a room. The wooden table is in the kitchen. On the table is a steaming mug.` and it actually _does_ something. The revelation that code could be so expressive blew my mind to bits. However, Inform 7 has some limitations that hold it back from being the final word in interactive fiction game creation. 
+
+## The Cost of Specialization
+Software architecture could be said to mostly be about managing tradeoffs. Inform 7 is a domain-specific language (DSL), going all-in on specialization for creating systems-driven interactive fiction games, and it does that really, really well; it is deeply expressive, intuitive, and focused. It is truly one of the coolest projects to ever grace the world of game creation. However, because of the approach taken in its creation, it makes some sacrifices: you can't integrate with external APIs (e.g. network calls for dynamic content delivery, analytics, cloud saves, or multiplayer, or adding visualization / audio cues), most implementations of the interpreter are not compatible with modern accessibility devices, it is virtually impossible to localize games for non-English-speaking players, the underlying legacy VMs struggle to scale with modern web integrations, the tooling is stuck in 2006, and its documentation is around 16k pages long. These limitations on their own aren't the end of the world, but together, they amount to a tool that is hard to recommend for a lot of projects. 
+
+Allegory.js aims to shift the slider a bit away from the DSL approach, nudging it in the direction of a generalist approach. Allegory.js is created with TypeScript. While TS lacks the poetic English-like syntax of Inform 7, it unlocks the entire modern web ecosystem. It allows devs to pull in a bewildering number of extant packages and resources, and it means games can run in the browser, with all of the flexibility and a11y / i18n goodness that comes with that. **The goal for Allegory.js is still to have an extremely intuitive developer experience (DX)**. To achieve this, a different set of tradeoffs is made, as compared to Inform 7. Enter **World Kits**.
+
+## DSLs for the Rest of Us
+A World Kit is a genre-specific facade that sits on top of the core Allegory.js engine. This facade turns the powerful, relatively technical API of the engine into a pseudo-domain-specific-language. Here's an example how it could look for setting up a scene in a cyberpunk saloon.
+
+_Note: the following examples are illustrative, and do not necessarily represent the final APIs of the engine or World Kits. The Allegory.js engine is still a work in progress!_
+
+
+**Raw Allegory.js APIs:**
+```ts
+import { ECS, IntentPipeline, DefineLaw } from 'allegory-engine-core';
+
+const ecs = new ECS<MyRawSchema>();
+const pipeline = new IntentPipeline(ecs /* ... */);
+
+// 1. Manually Create Entities
+const playerId = ecs.createEntity('player_1');
+const saloonId = ecs.createEntity('saloon');
+const cyberDeckId = ecs.createEntity('deck_01');
+
+// 2. Build the Saloon (with manual lighting logic)
+ecs.addComponent(saloonId, 'LocationData', { 
+    name: "Neon Saloon", 
+    desc: "Smells like ozone and cheap synthol." 
+});
+ecs.addComponent(saloonId, 'Illumination', { 
+    isLit: true, 
+    lightLevel: 55 
+});
+
+// 3. Build the Cyberdeck (with manual hierarchy and stats)
+ecs.addComponent(cyberDeckId, 'Position', { parentId: saloonId });
+ecs.addComponent(cyberDeckId, 'Interactable', { 
+    name: "Militech Deck", 
+    description: "A heavy, chrome cyberdeck." 
+});
+ecs.addComponent(cyberDeckId, 'Cyberware', { 
+    ram: 10, 
+    isHackable: true,
+    iceLevel: 1 
+});
+
+// 4. Manually write the Standard "Take" Law
+const RawTakeLaw = DefineLaw({
+    name: 'RawTake',
+    layer: LawLayers.kit, // StdLib Layer
+    intents: ['TAKE'],
+    matchers: [{ target: { components: ['Interactable', 'Position'] } }],
+    apply: async (ctx) => {
+        const targetPos = ctx.ecsUtils.getEntityComponentData(ctx.target.id, 'Position');
+        const playerPos = ctx.ecsUtils.getEntityComponentData(ctx.actor.id, 'Position');
+        
+        if (targetPos.parentId !== playerPos.parentId) {
+            return { status: 'REJECTED', narrations: ["It's not here."] };
+        }
+
+        return {
+            status: 'COMPLETED',
+            narrations: ["Taken."],
+            mutations: [
+                { op: 'UPDATE', entity: ctx.target.id, component: 'Position', value: { parentId: ctx.actor.id } }
+            ]
+        };
+    }
+});
+
+// 5. Manually write the Cyberdeck Instance Hook (Layer 3)
+const DeckTakeOverrideLaw = DefineLaw({
+    name: 'DeckTakeFlavor',
+    layer: LawLayers.instance, // Instance Layer (Overrides standard physics)
+    intents: ['TAKE'],
+    matchers: [{ target: { ids: ['deck_01'] } }], // Hardcoded to this exact entity
+    apply: async (ctx) => {
+        return {
+            status: 'PASSED', // Allow the standard RawTakeLaw to run next
+            narrations: ["Sparks fly as you disconnect it from the bar."]
+        };
+    }
+});
+
+// 6. Register everything
+pipeline.ratifyLaw(RawTakeLaw);
+pipeline.ratifyLaw(DeckTakeOverrideLaw);
+
+// Note: To make 'isHackable()' work, we would also need to write a 40-line 
+// HackingLaw here, but for brevity, we assume it's already registered.
+```
+
+**Using the Cyberpunk World Kit**
+```ts
+import { Game } from 'allegory-engine-core';
+import { CyberpunkKit, Location, CyberDeck } from 'allegory-kit-cyberpunk';
+
+// 1. Initialize the Game with the Kit (Registers standard Laws automatically)
+const game = Game.create({
+    kits: [CyberpunkKit] 
+});
+
+// 2. Define the world using the Kit's Fluent API
+const Saloon = Location('Neon Saloon')
+    .describedAs("Smells like ozone and cheap synthol.")
+    .isIlluminated(); // Automatically adds LightSource components
+
+// 3. Create genre-specific items
+const Deck = CyberDeck('Militech Deck')
+    .withRAM(10)      // Automatically adds HackingStats component
+    .isHackable()     // Opts into the HackLaw provided by the kit
+    .locatedIn(Saloon); // Handles the ECS Position component mapping behind the scenes
+
+// 4. Add custom Instance-level logic (Layer 3) easily
+Deck.onIntent('TAKE', (ctx) => {
+    return {
+        status: 'PASSED', // Let the Kit's standard "Take" physics happen...
+        narrations: ["Sparks fly as you disconnect it from the bar."] // ...but add flavor.
+    };
+});
+
+game.start();
+```
+
+Looking at the two examples above, the code using the cyberpunk World Kit is a lot more readable and intuitive than just using the base engine. There is a lot of boilerplate that the game developer doesn't have to type out in the World Kit example-- but more importantly, the code in the World Kit example is _declarative_, whereas the raw engine version is _imperative_. In the raw version, you need to understand how the Entity-Component-System (ECS) module works, and you also need to understand how to author Laws. In the World Kit version, the author can just focus on painting a scene, and let the facade handle the abstractions. 
+
+Part of the appeal of World Kits is that they are plug-and-play. There will be several available following the 1.0 launch of the engine, and the community will be empowered to create all sorts of World Kits that I could never dream up. Some World Kits may even include things like UI elements or sound packs or accessibility features. This approach pulls in some of the syntactic magic of Inform 7, while still allowing devs to make use of modern tooling. The main tradeoff is that World Kits require nontrivial upfront work to develop. This is a tradeoff that feels appropriate to me though-- one or more people can spend time cooking up a cool Kit, and after that, any number of people can create entire games in that genre without needing deep technical chops.
+
+**World Kits will also be composable**, so you could pull in the Western Adventure Kit and the Cyberpunk Kit, and you automatically have a mashup of genres without doing any manual labor at all. There will be some well-documented nuances regarding World Kit compatibility, e.g. a Create Your Own Adventure Kit with no simulation elements won't necessarily dovetail perfectly with a Zork-like Adventure Game Kit.
+
+It's really important for the feasibility of Allegory.js that World Kits exist alongside custom-made code. For a good number of games, the World Kit will provide everything needed to create the story that the author wants to tell. For others, the game logic may need to have, for example, bespoke Laws which add in entirely novel mechanics. 
+
+## Wrapping Up
+World Kits help bridge the gap between the deeply specialized approach of Inform 7 with the generalized power of a more traditional game engine. The result is a game engine flexible enough to be useful for both modestly technically-inclined people looking to express a story in their head, as well as developers looking to craft games with deeply custom systems and mechanics.
+
+As always, thanks for tuning in and following along as Allegory.js is built! Enjoy the rest of your day :)
+
+<BlogFooter />
