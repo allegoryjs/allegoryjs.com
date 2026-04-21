@@ -7,6 +7,7 @@ export interface BlogPost {
   date: string
   dateLabel: string
   title: string
+  blurb: string
   rawContent: string
 }
 
@@ -47,7 +48,7 @@ export function getAllBlogPosts(): BlogPost[] {
     const rawContent = fs.readFileSync(path.join(BLOG_DIR, filename), "utf-8")
     const slug = filename.replace(/\.mdx$/, "")
 
-    return { slug, number, date, dateLabel, title: extractTitle(rawContent), rawContent }
+    return { slug, number, date, dateLabel, title: extractTitle(rawContent), blurb: extractBlurb(rawContent), rawContent }
   })
 
   // Sort newest first (highest number = newest)
@@ -94,4 +95,14 @@ export function extractExcerpt(rawContent: string, maxLength = 200): string {
   const text = paragraphs.join(" ")
   if (text.length <= maxLength) return text
   return text.slice(0, maxLength).replace(/\s+\S*$/, "") + "…"
+}
+
+export function extractBlurb(rawContent: string): string {
+  // Look for a blurb comment in the format: {/* blurb: Your blurb here */}
+  const blurbMatch = rawContent.match(/\{\/\*\s*blurb:\s*(.+?)\s*\*\/\}/)
+  if (blurbMatch) {
+    return blurbMatch[1].trim()
+  }
+  // Fallback: extract first sentence from content after title
+  return extractExcerpt(rawContent, 150)
 }

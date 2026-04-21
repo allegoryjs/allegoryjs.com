@@ -1,6 +1,7 @@
 import { getAllBlogPosts } from "@/lib/blog"
 import { BlogNav } from "@/components/blog-nav"
 import { BlogPostRenderer } from "@/components/blog-post-renderer"
+import { BlogTableOfContents } from "@/components/blog-table-of-contents"
 
 export default function BlogPage() {
   const posts = getAllBlogPosts()
@@ -10,6 +11,7 @@ export default function BlogPage() {
       <BlogNav />
       <div className="max-w-3xl mx-auto px-6 py-12">
         <h1 className="text-4xl md:text-5xl font-serif mb-12 text-center">Blog</h1>
+        <BlogTableOfContents posts={posts.map(p => ({ slug: p.slug, title: p.title, blurb: p.blurb }))} />
         {posts.length === 0 && (
           <p className="text-center text-muted-foreground">No blog posts yet.</p>
         )}
