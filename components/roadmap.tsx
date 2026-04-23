@@ -173,13 +173,16 @@ export function Roadmap() {
         startOnLoad: false,
         theme: "base",
         gantt: {
-          titleTopMargin: 15,
-          barHeight: 20,
-          barGap: 4,
-          topPadding: 50,
+          titleTopMargin: 25,
+          barHeight: 40,
+          barGap: 8,
+          topPadding: 75,
+          bottomPadding: 10,
           gridLineStartPadding: 35,
-          fontSize: 11,
+          fontSize: 14,
+          sectionFontSize: 14,
           numberSectionStyles: 4,
+          leftPadding: 120,
         },
         themeVariables: isDarkMode ? DARK_THEME_VARS : LIGHT_THEME_VARS,
       })
@@ -187,12 +190,6 @@ export function Roadmap() {
       const { svg } = await mermaid.render("roadmap-chart", mermaidCode)
       if (containerRef.current) {
         containerRef.current.innerHTML = svg
-        // Force the rendered SVG to 600px tall so the chart itself is large
-        const svgEl = containerRef.current.querySelector("svg")
-        if (svgEl) {
-          svgEl.setAttribute("height", "600")
-          svgEl.style.minHeight = "600px"
-        }
         setRendered(true)
       }
     } catch (err) {
@@ -307,7 +304,7 @@ export function Roadmap() {
               {!isLoading && !error && !renderError && (
                 <div
                   ref={containerRef}
-                  className="min-h-[600px] [&_svg]:min-w-[600px] [&_svg]:min-h-[600px]"
+                  className="[&_svg]:min-w-[600px]"
                   aria-label={t("roadmap.chartLabel")}
                 />
               )}
