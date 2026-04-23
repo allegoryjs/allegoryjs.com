@@ -301,7 +301,7 @@ export function Roadmap() {
               {!isLoading && !error && !renderError && (
                 <div
                   ref={containerRef}
-                  className="min-h-[200px] [&_svg]:min-w-[600px]"
+                  className="min-h-[600px] [&_svg]:min-w-[600px]"
                   aria-label={t("roadmap.chartLabel")}
                 />
               )}
