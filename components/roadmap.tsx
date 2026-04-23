@@ -147,6 +147,7 @@ export function Roadmap() {
     const el = scrollRef.current
     if (!el) return
     setCanScrollLeft(el.scrollLeft > 0)
+    // 1px tolerance for subpixel rendering differences
     setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
   }, [])
 
