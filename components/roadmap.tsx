@@ -24,6 +24,80 @@ function extractMermaidBlock(markdown: string): string | null {
   return match ? match[1].trim() : null
 }
 
+const LIGHT_THEME_VARS = {
+  fontFamily: "inherit",
+  primaryColor: "#E0C9A6",
+  primaryTextColor: "#4A3728",
+  primaryBorderColor: "#C4A47A",
+  secondaryColor: "#F0D4A8",
+  secondaryTextColor: "#4A3728",
+  secondaryBorderColor: "#D4B088",
+  tertiaryColor: "#F5E6D0",
+  tertiaryTextColor: "#4A3728",
+  tertiaryBorderColor: "#D9C4A0",
+  lineColor: "#C4A47A",
+  textColor: "#4A3728",
+  sectionBkgColor: "#F5E6D0",
+  sectionBkgColor2: "#FDF6ED",
+  altSectionBkgColor: "#FDF6ED",
+  gridColor: "#D9CAAE",
+  todayLineColor: "#C99A40",
+  doneTaskBkgColor: "#C4A47A",
+  doneTaskBorderColor: "#A88B5E",
+  activeTaskBkgColor: "#E8BF8E",
+  activeTaskBorderColor: "#C99A40",
+  taskBkgColor: "#E0C9A6",
+  taskBorderColor: "#C4A47A",
+  taskTextColor: "#4A3728",
+  taskTextDarkColor: "#4A3728",
+  taskTextLightColor: "#F8F3EB",
+  cScale0: "#E0C9A6",
+  cScale1: "#F0D4A8",
+  cScale2: "#D4B896",
+  cScale3: "#E8C49A",
+  cScaleLabel0: "#4A3728",
+  cScaleLabel1: "#4A3728",
+  cScaleLabel2: "#4A3728",
+  cScaleLabel3: "#4A3728",
+}
+
+const DARK_THEME_VARS = {
+  fontFamily: "inherit",
+  primaryColor: "#5C4A3A",
+  primaryTextColor: "#E8DCC8",
+  primaryBorderColor: "#7A6650",
+  secondaryColor: "#6B5540",
+  secondaryTextColor: "#E8DCC8",
+  secondaryBorderColor: "#8A7660",
+  tertiaryColor: "#4A3828",
+  tertiaryTextColor: "#E8DCC8",
+  tertiaryBorderColor: "#6B5A48",
+  lineColor: "#7A6650",
+  textColor: "#E8DCC8",
+  sectionBkgColor: "#3A2E22",
+  sectionBkgColor2: "#342820",
+  altSectionBkgColor: "#342820",
+  gridColor: "#4A3E32",
+  todayLineColor: "#C99A40",
+  doneTaskBkgColor: "#7A6650",
+  doneTaskBorderColor: "#9A8670",
+  activeTaskBkgColor: "#8B7040",
+  activeTaskBorderColor: "#C99A40",
+  taskBkgColor: "#5C4A3A",
+  taskBorderColor: "#7A6650",
+  taskTextColor: "#E8DCC8",
+  taskTextDarkColor: "#E8DCC8",
+  taskTextLightColor: "#E8DCC8",
+  cScale0: "#5C4A3A",
+  cScale1: "#6B5540",
+  cScale2: "#4A3828",
+  cScale3: "#7A6248",
+  cScaleLabel0: "#E8DCC8",
+  cScaleLabel1: "#E8DCC8",
+  cScaleLabel2: "#E8DCC8",
+  cScaleLabel3: "#E8DCC8",
+}
+
 function RoadmapSkeleton() {
   return (
     <div className="animate-pulse space-y-4 p-8">
@@ -36,8 +110,12 @@ function RoadmapSkeleton() {
 export function Roadmap() {
   const { t } = useI18n()
   const containerRef = useRef<HTMLDivElement>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const [rendered, setRendered] = useState(false)
   const [renderError, setRenderError] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(false)
 
   const { data: readme, error, isLoading } = useSWR<string>(
     README_API_URL,
@@ -49,6 +127,41 @@ export function Roadmap() {
   )
 
   const mermaidCode = readme ? extractMermaidBlock(readme) : null
+
+  // Track dark mode preference and re-render chart when it changes
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    const mql = window.matchMedia("(prefers-color-scheme: dark)")
+    setIsDarkMode(mql.matches)
+    const handler = (e: MediaQueryListEvent) => {
+      setIsDarkMode(e.matches)
+      setRendered(false)
+      if (containerRef.current) containerRef.current.innerHTML = ""
+    }
+    mql.addEventListener("change", handler)
+    return () => mql.removeEventListener("change", handler)
+  }, [])
+
+  // Track horizontal scroll state for scroll indicators
+  const checkScroll = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    setCanScrollLeft(el.scrollLeft > 0)
+    setCanScrollRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 1)
+  }, [])
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!el) return
+    checkScroll()
+    el.addEventListener("scroll", checkScroll, { passive: true })
+    const observer = new ResizeObserver(checkScroll)
+    observer.observe(el)
+    return () => {
+      el.removeEventListener("scroll", checkScroll)
+      observer.disconnect()
+    }
+  }, [checkScroll, rendered])
 
   const renderChart = useCallback(async () => {
     if (!mermaidCode || !containerRef.current || rendered) return
@@ -67,44 +180,7 @@ export function Roadmap() {
           fontSize: 11,
           numberSectionStyles: 4,
         },
-        themeVariables: {
-          fontFamily: "inherit",
-          // Light brown / light orange palette matching the site theme
-          primaryColor: "#E0C9A6",
-          primaryTextColor: "#4A3728",
-          primaryBorderColor: "#C4A47A",
-          secondaryColor: "#F0D4A8",
-          secondaryTextColor: "#4A3728",
-          secondaryBorderColor: "#D4B088",
-          tertiaryColor: "#F5E6D0",
-          tertiaryTextColor: "#4A3728",
-          tertiaryBorderColor: "#D9C4A0",
-          lineColor: "#C4A47A",
-          textColor: "#4A3728",
-          // Gantt-specific
-          sectionBkgColor: "#F5E6D0",
-          sectionBkgColor2: "#FDF6ED",
-          altSectionBkgColor: "#FDF6ED",
-          gridColor: "#D9CAAE",
-          todayLineColor: "#C99A40",
-          doneTaskBkgColor: "#C4A47A",
-          doneTaskBorderColor: "#A88B5E",
-          activeTaskBkgColor: "#E8BF8E",
-          activeTaskBorderColor: "#C99A40",
-          taskBkgColor: "#E0C9A6",
-          taskBorderColor: "#C4A47A",
-          taskTextColor: "#4A3728",
-          taskTextDarkColor: "#4A3728",
-          taskTextLightColor: "#F8F3EB",
-          cScale0: "#E0C9A6",
-          cScale1: "#F0D4A8",
-          cScale2: "#D4B896",
-          cScale3: "#E8C49A",
-          cScaleLabel0: "#4A3728",
-          cScaleLabel1: "#4A3728",
-          cScaleLabel2: "#4A3728",
-          cScaleLabel3: "#4A3728",
-        },
+        themeVariables: isDarkMode ? DARK_THEME_VARS : LIGHT_THEME_VARS,
       })
 
       const { svg } = await mermaid.render("roadmap-chart", mermaidCode)
@@ -116,7 +192,7 @@ export function Roadmap() {
       console.error("Mermaid render failed:", err)
       setRenderError(true)
     }
-  }, [mermaidCode, rendered])
+  }, [mermaidCode, rendered, isDarkMode])
 
   useEffect(() => {
     renderChart()
@@ -171,50 +247,64 @@ export function Roadmap() {
             </span>
           </div>
 
-          <div className="p-4 overflow-x-auto">
-            {isLoading && <RoadmapSkeleton />}
-
-            {error && (
+          <div className="relative">
+            {canScrollLeft && (
               <div
-                className="p-8 text-center text-muted-foreground"
-                role="alert"
-              >
-                <p>{t("roadmap.unableToLoad")}</p>
-                <a
-                  href="https://github.com/allegoryjs/allegoryjs#roadmap"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline mt-2 inline-block"
-                >
-                  {t("roadmap.viewOnGitHub")}
-                </a>
-              </div>
-            )}
-
-            {renderError && (
-              <div
-                className="p-8 text-center text-muted-foreground"
-                role="alert"
-              >
-                <p>{t("roadmap.renderError")}</p>
-                <a
-                  href="https://github.com/allegoryjs/allegoryjs#roadmap"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-primary hover:underline mt-2 inline-block"
-                >
-                  {t("roadmap.viewOnGitHub")}
-                </a>
-              </div>
-            )}
-
-            {!isLoading && !error && !renderError && (
-              <div
-                ref={containerRef}
-                className="flex justify-center [&_svg]:max-w-full"
-                aria-label={t("roadmap.chartLabel")}
+                className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-card to-transparent z-10 pointer-events-none"
+                aria-hidden="true"
               />
             )}
+            {canScrollRight && (
+              <div
+                className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-card to-transparent z-10 pointer-events-none"
+                aria-hidden="true"
+              />
+            )}
+            <div ref={scrollRef} className="p-4 overflow-x-auto">
+              {isLoading && <RoadmapSkeleton />}
+
+              {error && (
+                <div
+                  className="p-8 text-center text-muted-foreground"
+                  role="alert"
+                >
+                  <p>{t("roadmap.unableToLoad")}</p>
+                  <a
+                    href="https://github.com/allegoryjs/allegoryjs#roadmap"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline mt-2 inline-block"
+                  >
+                    {t("roadmap.viewOnGitHub")}
+                  </a>
+                </div>
+              )}
+
+              {renderError && (
+                <div
+                  className="p-8 text-center text-muted-foreground"
+                  role="alert"
+                >
+                  <p>{t("roadmap.renderError")}</p>
+                  <a
+                    href="https://github.com/allegoryjs/allegoryjs#roadmap"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-primary hover:underline mt-2 inline-block"
+                  >
+                    {t("roadmap.viewOnGitHub")}
+                  </a>
+                </div>
+              )}
+
+              {!isLoading && !error && !renderError && (
+                <div
+                  ref={containerRef}
+                  className="min-h-[200px] [&_svg]:min-w-[600px]"
+                  aria-label={t("roadmap.chartLabel")}
+                />
+              )}
+            </div>
           </div>
 
           <div className="px-4 py-3 border-t border-border bg-card">
