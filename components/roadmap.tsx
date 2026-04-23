@@ -206,7 +206,7 @@ export function Roadmap() {
         startOnLoad: false,
         theme: "base",
         gantt: {
-          useMaxWidth: false,
+          useMaxWidth: true,
           titleTopMargin: 25,
           barHeight: 40,
           barGap: 8,
