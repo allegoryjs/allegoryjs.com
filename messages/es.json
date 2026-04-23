@@ -58,6 +58,17 @@
     "checkRepository": "Revisar repositorio",
     "viewAllCommits": "Ver todos los commits en GitHub →"
   },
+  "roadmap": {
+    "badge": "Hoja de ruta",
+    "title": "Hoja de ruta del desarrollo",
+    "subtitle": "Sigue nuestro progreso desde el kernel hasta el lanzamiento — obtenido en vivo del repositorio de GitHub.",
+    "source": "allegoryjs/allegoryjs — README.md",
+    "unableToLoad": "No se pudo cargar la hoja de ruta en este momento.",
+    "renderError": "No se pudo renderizar el gráfico de la hoja de ruta.",
+    "viewOnGitHub": "Ver en GitHub",
+    "chartLabel": "Gráfico Gantt de la hoja de ruta de desarrollo de Allegory.js",
+    "viewFullRoadmap": "Ver la hoja de ruta completa en GitHub →"
+  },
   "newsletter": {
     "title": "Mantente al día",
     "subtitle": "Recibe actualizaciones ocasionales sobre el desarrollo de Allegory.js, nuevas funcionalidades e ideas sobre cómo crear ficción interactiva para la web.",

@@ -58,6 +58,17 @@
     "checkRepository": "Check Repository",
     "viewAllCommits": "View all commits on GitHub →"
   },
+  "roadmap": {
+    "badge": "Roadmap",
+    "title": "Development Roadmap",
+    "subtitle": "Track our progress from kernel to launch — pulled live from the GitHub repository.",
+    "source": "allegoryjs/allegoryjs — README.md",
+    "unableToLoad": "Unable to load the roadmap right now.",
+    "renderError": "Unable to render the roadmap chart.",
+    "viewOnGitHub": "View on GitHub",
+    "chartLabel": "Allegory.js development roadmap Gantt chart",
+    "viewFullRoadmap": "View full roadmap on GitHub →"
+  },
   "newsletter": {
     "title": "Stay up to date",
     "subtitle": "Get occasional updates on Allegory.js development, new features, and insights into building interactive fiction for the web.",
