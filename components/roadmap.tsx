@@ -116,6 +116,8 @@ export function Roadmap() {
   const [isDarkMode, setIsDarkMode] = useState(false)
   const [canScrollLeft, setCanScrollLeft] = useState(false)
   const [canScrollRight, setCanScrollRight] = useState(false)
+  const [isDragging, setIsDragging] = useState(false)
+  const dragStart = useRef({ x: 0, y: 0, scrollLeft: 0, scrollTop: 0 })
 
   const { data: readme, error, isLoading } = useSWR<string>(
     README_API_URL,
@@ -163,6 +165,33 @@ export function Roadmap() {
       observer.disconnect()
     }
   }, [checkScroll, rendered])
+
+  // Drag-to-scroll handlers
+  const onMouseDown = useCallback((e: React.MouseEvent) => {
+    const el = scrollRef.current
+    if (!el) return
+    setIsDragging(true)
+    dragStart.current = {
+      x: e.clientX,
+      y: e.clientY,
+      scrollLeft: el.scrollLeft,
+      scrollTop: el.scrollTop,
+    }
+  }, [])
+
+  const onMouseMove = useCallback(
+    (e: React.MouseEvent) => {
+      if (!isDragging) return
+      const el = scrollRef.current
+      if (!el) return
+      e.preventDefault()
+      el.scrollLeft = dragStart.current.scrollLeft - (e.clientX - dragStart.current.x)
+      el.scrollTop = dragStart.current.scrollTop - (e.clientY - dragStart.current.y)
+    },
+    [isDragging]
+  )
+
+  const onMouseUp = useCallback(() => setIsDragging(false), [])
 
   const renderChart = useCallback(async () => {
     if (!mermaidCode || !containerRef.current || rendered) return
@@ -265,7 +294,14 @@ export function Roadmap() {
                 aria-hidden="true"
               />
             )}
-            <div ref={scrollRef} className="p-4 overflow-x-auto">
+            <div
+              ref={scrollRef}
+              className={`p-4 overflow-auto max-h-[400px] ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
+              onMouseDown={onMouseDown}
+              onMouseMove={onMouseMove}
+              onMouseUp={onMouseUp}
+              onMouseLeave={onMouseUp}
+            >
               {isLoading && <RoadmapSkeleton />}
 
               {error && (
