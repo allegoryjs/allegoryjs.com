@@ -3,6 +3,7 @@
 import { Hero } from "@/components/hero"
 import { HowItWorks } from "@/components/how-it-works"
 import { BlogPreview } from "@/components/blog-preview"
+import { Roadmap } from "@/components/roadmap"
 import { GitHubCommits } from "@/components/github-commits"
 import { Newsletter } from "@/components/newsletter"
 import { Footer } from "@/components/footer"
@@ -40,6 +41,7 @@ export function HomeContent({ latestPost }: { latestPost: BlogPreviewData | null
             slug={latestPost.slug}
           />
         )}
+        <Roadmap />
         <GitHubCommits />
         <Newsletter />
         <Footer />
