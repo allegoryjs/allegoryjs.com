@@ -16,7 +16,11 @@ const fetcher = (url: string) =>
   )
 
 function extractMermaidBlock(markdown: string): string | null {
-  const match = markdown.match(/```mermaid\s*\n([\s\S]*?)```/)
+  // Target the mermaid block in the Roadmap section specifically
+  const roadmapSection = markdown.indexOf("## Roadmap")
+  const searchText =
+    roadmapSection !== -1 ? markdown.slice(roadmapSection) : markdown
+  const match = searchText.match(/```mermaid\s*\n([\s\S]*?)```/)
   return match ? match[1].trim() : null
 }
 
