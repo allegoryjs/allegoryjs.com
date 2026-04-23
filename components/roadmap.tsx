@@ -57,7 +57,7 @@ export function Roadmap() {
       const mermaid = (await import("mermaid")).default
       mermaid.initialize({
         startOnLoad: false,
-        theme: "default",
+        theme: "base",
         gantt: {
           titleTopMargin: 15,
           barHeight: 20,
@@ -69,6 +69,41 @@ export function Roadmap() {
         },
         themeVariables: {
           fontFamily: "inherit",
+          // Light brown / light orange palette matching the site theme
+          primaryColor: "#E0C9A6",
+          primaryTextColor: "#4A3728",
+          primaryBorderColor: "#C4A47A",
+          secondaryColor: "#F0D4A8",
+          secondaryTextColor: "#4A3728",
+          secondaryBorderColor: "#D4B088",
+          tertiaryColor: "#F5E6D0",
+          tertiaryTextColor: "#4A3728",
+          tertiaryBorderColor: "#D9C4A0",
+          lineColor: "#C4A47A",
+          textColor: "#4A3728",
+          // Gantt-specific
+          sectionBkgColor: "#F5E6D0",
+          sectionBkgColor2: "#FDF6ED",
+          altSectionBkgColor: "#FDF6ED",
+          gridColor: "#D9CAAE",
+          todayLineColor: "#C99A40",
+          doneTaskBkgColor: "#C4A47A",
+          doneTaskBorderColor: "#A88B5E",
+          activeTaskBkgColor: "#E8BF8E",
+          activeTaskBorderColor: "#C99A40",
+          taskBkgColor: "#E0C9A6",
+          taskBorderColor: "#C4A47A",
+          taskTextColor: "#4A3728",
+          taskTextDarkColor: "#4A3728",
+          taskTextLightColor: "#F8F3EB",
+          cScale0: "#E0C9A6",
+          cScale1: "#F0D4A8",
+          cScale2: "#D4B896",
+          cScale3: "#E8C49A",
+          cScaleLabel0: "#4A3728",
+          cScaleLabel1: "#4A3728",
+          cScaleLabel2: "#4A3728",
+          cScaleLabel3: "#4A3728",
         },
       })
 
