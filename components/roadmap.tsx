@@ -343,6 +343,7 @@ export function Roadmap() {
               {!isLoading && !error && !renderError && (
                 <div
                   ref={containerRef}
+                  className="min-w-[800px]"
                   aria-label={t("roadmap.chartLabel")}
                 />
               )}
