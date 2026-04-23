@@ -112,7 +112,8 @@ export function Roadmap() {
         containerRef.current.innerHTML = svg
         setRendered(true)
       }
-    } catch {
+    } catch (err) {
+      console.error("Mermaid render failed:", err)
       setRenderError(true)
     }
   }, [mermaidCode, rendered])
