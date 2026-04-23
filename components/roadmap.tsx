@@ -173,6 +173,7 @@ export function Roadmap() {
         startOnLoad: false,
         theme: "base",
         gantt: {
+          useMaxWidth: false,
           titleTopMargin: 25,
           barHeight: 40,
           barGap: 8,
@@ -304,7 +305,6 @@ export function Roadmap() {
               {!isLoading && !error && !renderError && (
                 <div
                   ref={containerRef}
-                  className="[&_svg]:min-w-[600px]"
                   aria-label={t("roadmap.chartLabel")}
                 />
               )}
