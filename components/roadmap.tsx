@@ -179,19 +179,23 @@ export function Roadmap() {
     }
   }, [])
 
-  const onMouseMove = useCallback(
-    (e: React.MouseEvent) => {
-      if (!isDragging) return
+  useEffect(() => {
+    if (!isDragging) return
+    const onMouseMove = (e: MouseEvent) => {
       const el = scrollRef.current
       if (!el) return
       e.preventDefault()
       el.scrollLeft = dragStart.current.scrollLeft - (e.clientX - dragStart.current.x)
       el.scrollTop = dragStart.current.scrollTop - (e.clientY - dragStart.current.y)
-    },
-    [isDragging]
-  )
-
-  const onMouseUp = useCallback(() => setIsDragging(false), [])
+    }
+    const onMouseUp = () => setIsDragging(false)
+    document.addEventListener("mousemove", onMouseMove)
+    document.addEventListener("mouseup", onMouseUp)
+    return () => {
+      document.removeEventListener("mousemove", onMouseMove)
+      document.removeEventListener("mouseup", onMouseUp)
+    }
+  }, [isDragging])
 
   const renderChart = useCallback(async () => {
     if (!mermaidCode || !containerRef.current || rendered) return
@@ -298,9 +302,7 @@ export function Roadmap() {
               ref={scrollRef}
               className={`p-4 overflow-auto max-h-[400px] ${isDragging ? "cursor-grabbing select-none" : "cursor-grab"}`}
               onMouseDown={onMouseDown}
-              onMouseMove={onMouseMove}
-              onMouseUp={onMouseUp}
-              onMouseLeave={onMouseUp}
+              tabIndex={0}
             >
               {isLoading && <RoadmapSkeleton />}
 
