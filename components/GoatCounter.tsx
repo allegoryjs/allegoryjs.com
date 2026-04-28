@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, Suspense } from 'react';
 import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 
-export default function GoatCounter() {
+// 1. Move the hooks and logic into a separate inner component
+function GoatCounterEvents() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const isInitialLoad = useRef(true);
@@ -24,11 +25,22 @@ export default function GoatCounter() {
     }
   }, [pathname, searchParams]);
 
+  return null;
+}
+
+// 2. Export the main component wrapped in <Suspense>
+export default function GoatCounter() {
   return (
-    <Script
-      strategy="afterInteractive"
-      data-goatcounter="https://allegoryjs.goatcounter.com/count"
-      src="//gc.zgo.at/count.js"
-    />
+    <>
+      <Suspense fallback={null}>
+        <GoatCounterEvents />
+      </Suspense>
+
+      <Script
+        strategy="afterInteractive"
+        data-goatcounter="https://allegoryjs.goatcounter.com/count"
+        src="//gc.zgo.at/count.js"
+      />
+    </>
   );
 }
