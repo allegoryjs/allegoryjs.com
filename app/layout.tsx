@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next'
 import Script from 'next/script'
 import { I18nProvider } from '@/lib/i18n'
 import { ClientLayout } from '@/components/client-layout'
+import GoatCounter from '@/components/GoatCounter';
 import './globals.css'
 
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
@@ -113,11 +114,7 @@ export default function RootLayout({
           </ClientLayout>
         </I18nProvider>
         <Analytics />
-        <Script
-          data-goatcounter="https://allegoryjs.goatcounter.com/count"
-          src="https://gc.zgo.at/count.js"
-          strategy="afterInteractive"
-        />
+        <GoatCounter />
       </body>
     </html>
   )
