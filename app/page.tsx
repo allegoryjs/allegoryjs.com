@@ -4,20 +4,16 @@ import { HomeContent } from "@/components/home-content"
 
 export default async function Home() {
   const latest = getLatestBlogPost()
-  const latestExcerpt = latest ? await serialize(extractExcerptMarkdown(latest.rawContent)) : null
+  const latestPost = latest
+    ? {
+        title: latest.title,
+        dateLabel: latest.dateLabel,
+        excerpt: await serialize(extractExcerptMarkdown(latest.rawContent)),
+        slug: latest.slug,
+      }
+    : null
 
   return (
-    <HomeContent
-      latestPost={
-        latest
-          ? {
-              title: latest.title,
-              dateLabel: latest.dateLabel,
-              excerpt: latestExcerpt,
-              slug: latest.slug,
-            }
-          : null
-      }
-    />
+    <HomeContent latestPost={latestPost} />
   )
 }

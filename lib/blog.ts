@@ -77,14 +77,11 @@ export function extractTitle(rawContent: string): string {
   return "Untitled"
 }
 
-export function extractExcerpt(rawContent: string, maxLength = 200): string {
-  const lines = getBodyLines(rawContent)
+function extractExcerptFromLines(lines: string[], maxLength: number): string {
   let foundTitle = false
   const paragraphs: string[] = []
 
   for (const line of lines) {
-    // Skip imports and empty lines before title
-    if (line.startsWith("import ")) continue
     if (line.match(/^#+\s/)) {
       if (!foundTitle) {
         foundTitle = true
@@ -101,6 +98,10 @@ export function extractExcerpt(rawContent: string, maxLength = 200): string {
   const text = paragraphs.join(" ")
   if (text.length <= maxLength) return text
   return text.slice(0, maxLength).replace(/\s+\S*$/, "") + "…"
+}
+
+export function extractExcerpt(rawContent: string, maxLength = 200): string {
+  return extractExcerptFromLines(getBodyLines(rawContent), maxLength)
 }
 
 export function extractExcerptMarkdown(rawContent: string): string {
@@ -128,7 +129,7 @@ export function extractExcerptMarkdown(rawContent: string): string {
   }
 
   const excerpt = excerptLines.join("\n").trim()
-  return excerpt || extractExcerpt(rawContent)
+  return excerpt || extractExcerptFromLines(lines, 200)
 }
 
 export function extractBlurb(rawContent: string): string {
