@@ -12,11 +12,31 @@ export interface BlogPost {
 }
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
+const DEFAULT_EXCERPT_LENGTH = 200
 
 function getBodyLines(rawContent: string): string[] {
-  return rawContent
-    .split("\n")
-    .filter((line) => !line.startsWith("import ") && !line.match(/^\s*\{\/\*/))
+  const bodyLines: string[] = []
+  let insideJsxComment = false
+
+  for (const line of rawContent.split("\n")) {
+    const trimmed = line.trim()
+
+    if (insideJsxComment) {
+      if (trimmed.includes("*/}")) insideJsxComment = false
+      continue
+    }
+
+    if (line.startsWith("import ")) continue
+
+    if (trimmed.startsWith("{/*")) {
+      if (!trimmed.includes("*/}")) insideJsxComment = true
+      continue
+    }
+
+    bodyLines.push(line)
+  }
+
+  return bodyLines
 }
 
 function parseDateFromFilename(filename: string): { number: number; date: string; dateLabel: string } {
@@ -100,7 +120,7 @@ function extractExcerptFromLines(lines: string[], maxLength: number): string {
   return text.slice(0, maxLength).replace(/\s+\S*$/, "") + "…"
 }
 
-export function extractExcerpt(rawContent: string, maxLength = 200): string {
+export function extractExcerpt(rawContent: string, maxLength = DEFAULT_EXCERPT_LENGTH): string {
   return extractExcerptFromLines(getBodyLines(rawContent), maxLength)
 }
 
@@ -129,7 +149,7 @@ export function extractExcerptMarkdown(rawContent: string): string {
   }
 
   const excerpt = excerptLines.join("\n").trim()
-  return excerpt || extractExcerptFromLines(lines, 200)
+  return excerpt || extractExcerptFromLines(lines, DEFAULT_EXCERPT_LENGTH)
 }
 
 export function extractBlurb(rawContent: string): string {
