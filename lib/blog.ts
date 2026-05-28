@@ -13,6 +13,12 @@ export interface BlogPost {
 
 const BLOG_DIR = path.join(process.cwd(), "content", "blog")
 
+function getBodyLines(rawContent: string): string[] {
+  return rawContent
+    .split("\n")
+    .filter((line) => !line.startsWith("import ") && !line.match(/^\s*\{\/\*/))
+}
+
 function parseDateFromFilename(filename: string): { number: number; date: string; dateLabel: string } {
   // Format: 001_feb-08-2026.mdx
   const base = filename.replace(/\.mdx$/, "")
@@ -63,7 +69,7 @@ export function getLatestBlogPost(): BlogPost | null {
 
 export function extractTitle(rawContent: string): string {
   // Find the first # heading in the MDX content (skip import lines)
-  const lines = rawContent.split("\n")
+  const lines = getBodyLines(rawContent)
   for (const line of lines) {
     const match = line.match(/^#\s+(.+)$/)
     if (match) return match[1]
@@ -72,7 +78,7 @@ export function extractTitle(rawContent: string): string {
 }
 
 export function extractExcerpt(rawContent: string, maxLength = 200): string {
-  const lines = rawContent.split("\n")
+  const lines = getBodyLines(rawContent)
   let foundTitle = false
   const paragraphs: string[] = []
 
@@ -95,6 +101,34 @@ export function extractExcerpt(rawContent: string, maxLength = 200): string {
   const text = paragraphs.join(" ")
   if (text.length <= maxLength) return text
   return text.slice(0, maxLength).replace(/\s+\S*$/, "") + "…"
+}
+
+export function extractExcerptMarkdown(rawContent: string): string {
+  const lines = getBodyLines(rawContent)
+  let foundTitle = false
+  const excerptLines: string[] = []
+
+  for (const line of lines) {
+    if (line.match(/^#+\s/)) {
+      if (!foundTitle) {
+        foundTitle = true
+        continue
+      }
+      break
+    }
+
+    if (!foundTitle) continue
+
+    if (!line.trim()) {
+      if (excerptLines.length > 0) break
+      continue
+    }
+
+    excerptLines.push(line)
+  }
+
+  const excerpt = excerptLines.join("\n").trim()
+  return excerpt || extractExcerpt(rawContent)
 }
 
 export function extractBlurb(rawContent: string): string {

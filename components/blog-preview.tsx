@@ -1,11 +1,12 @@
 "use client"
 
+import { MDXRemote, type MDXRemoteSerializeResult } from "next-mdx-remote"
 import Link from "next/link"
 
 interface BlogPreviewProps {
   title: string
   dateLabel: string
-  excerpt: string
+  excerpt: MDXRemoteSerializeResult
   slug: string
 }
 
@@ -31,7 +32,9 @@ export function BlogPreview({ title, dateLabel, excerpt, slug }: BlogPreviewProp
         <div className="bg-card rounded-lg border border-border overflow-hidden p-6">
           <time className="text-xs text-muted-foreground">{dateLabel}</time>
           <h3 className="text-xl font-serif mt-2 mb-3 text-foreground">{title}</h3>
-          <p className="text-muted-foreground text-sm leading-relaxed mb-4">{excerpt}</p>
+          <div className="mb-4 text-sm leading-relaxed text-muted-foreground [&_p]:m-0 [&_a]:text-primary [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-primary/80 [&_strong]:text-foreground [&_em]:text-foreground/90 [&_code]:rounded [&_code]:bg-muted [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:font-mono [&_code]:text-xs">
+            <MDXRemote {...excerpt} />
+          </div>
           <Link
             href={`/blog#post-${slug}`}
             className="text-sm text-primary hover:underline inline-flex items-center gap-1"

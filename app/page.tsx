@@ -1,8 +1,10 @@
-import { getLatestBlogPost, extractExcerpt } from "@/lib/blog"
+import { serialize } from "next-mdx-remote/serialize"
+import { getLatestBlogPost, extractExcerptMarkdown } from "@/lib/blog"
 import { HomeContent } from "@/components/home-content"
 
-export default function Home() {
+export default async function Home() {
   const latest = getLatestBlogPost()
+  const latestExcerpt = latest ? await serialize(extractExcerptMarkdown(latest.rawContent)) : null
 
   return (
     <HomeContent
@@ -11,7 +13,7 @@ export default function Home() {
           ? {
               title: latest.title,
               dateLabel: latest.dateLabel,
-              excerpt: extractExcerpt(latest.rawContent),
+              excerpt: latestExcerpt,
               slug: latest.slug,
             }
           : null

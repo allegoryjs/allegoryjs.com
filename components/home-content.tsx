@@ -1,5 +1,6 @@
 "use client"
 
+import type { MDXRemoteSerializeResult } from "next-mdx-remote"
 import { Hero } from "@/components/hero"
 import { HowItWorks } from "@/components/how-it-works"
 import { BlogPreview } from "@/components/blog-preview"
@@ -13,7 +14,7 @@ import { useI18n } from "@/lib/i18n"
 interface BlogPreviewData {
   title: string
   dateLabel: string
-  excerpt: string
+  excerpt: MDXRemoteSerializeResult
   slug: string
 }
 
