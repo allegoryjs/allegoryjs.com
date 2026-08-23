@@ -20,7 +20,30 @@ interface Commit {
   } | null
 }
 
-const fetcher = (url: string) => fetch(url).then((res) => res.json())
+const fetchAllCommits = async () => {
+  const repo = "allegoryjs/allegoryjs"
+  const branchesRes = await fetch(`https://api.github.com/repos/${repo}/branches`)
+  if (!branchesRes.ok) throw new Error("Failed to fetch branches")
+  const branches = await branchesRes.json()
+
+  const commitsPromises = branches.map((branch: any) =>
+    fetch(`https://api.github.com/repos/${repo}/commits?sha=${encodeURIComponent(branch.name)}&per_page=5`)
+      .then(res => res.ok ? res.json() : [])
+  )
+
+  const commitsArrays = await Promise.all(commitsPromises)
+  const allCommits = commitsArrays.flat()
+
+  const uniqueCommits = Array.from(
+    new Map(allCommits.map(c => [c.sha, c])).values()
+  ) as Commit[]
+
+  uniqueCommits.sort((a, b) => 
+    new Date(b.commit.author.date).getTime() - new Date(a.commit.author.date).getTime()
+  )
+
+  return uniqueCommits.slice(0, 5)
+}
 
 function CommitSkeleton() {
   return (
@@ -37,8 +60,8 @@ function CommitSkeleton() {
 export function GitHubCommits() {
   const { t, locale } = useI18n()
   const { data, error, isLoading } = useSWR<Commit[]>(
-    "https://api.github.com/repos/allegoryjs/allegoryjs/commits?per_page=5",
-    fetcher,
+    "github-all-commits",
+    fetchAllCommits,
     {
       revalidateOnFocus: false,
       dedupingInterval: 60000,
